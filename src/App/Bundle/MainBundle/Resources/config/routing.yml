@@ -1,0 +1,7 @@
+app_main_homepage:
+    path:     /
+    defaults: { _controller: AppMainBundle:Default:index }
+
+app_main_submission_submit:
+    path:     /submit
+    defaults: { _controller: AppMainBundle:Submission:submit }

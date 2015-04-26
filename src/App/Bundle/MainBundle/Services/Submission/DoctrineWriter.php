@@ -3,6 +3,9 @@
 namespace App\Bundle\MainBundle\Services\Submission;
 
 use App\Bundle\MainBundle\Entity\Submission as SubmissionEntity;
+use App\Bundle\MainBundle\Events\Submission\SubmissionEvents;
+use App\Bundle\MainBundle\Events\Submission\ValidatedEvent;
+use App\Component\Submission\Exceptions\ValidationFailedException;
 use App\Component\Submission\Submission;
 use App\Component\Submission\WriterInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -49,6 +52,24 @@ class DoctrineWriter implements WriterInterface
         $this->getRepository()->save($entity);
 
         $submission->setIdentifier($entity->getId());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function validate($identifier)
+    {
+        $entity = $this->find($identifier);
+
+        if ($entity === null || $entity->isValidated()) {
+            throw new ValidationFailedException(sprintf('Cannot validate the submission "%s".', $identifier));
+        }
+
+        $entity->setValidated(true);
+        $this->getRepository()->save($entity);
+
+        $event = new ValidatedEvent($this->converter->from($entity));
+        $this->eventDispatcher->dispatch(SubmissionEvents::VALIDATED, $event);
     }
 
     /**

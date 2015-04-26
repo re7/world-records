@@ -16,7 +16,10 @@
                 en {{ submission.run.time }}{% if submission.run.links|length == 0 %}(pas de vidéo){% endif %}
                 - {{ submission.run.date|date('d/m/Y') }}
             </p>
-            <div>Soumis le {{ submission.createdAt|date('d/m/Y') }} </div>
+            <div>
+                Soumis le {{ submission.createdAt|date('d/m/Y') }}
+                - <a href="{{ path('app_main_submission_validate', {identifier: submission.identifier}) }}">valider la soumission</a>
+            </div>
         </div>
     {% else %}
         <div>{{ 'submission.list.none'|trans }}</div>

@@ -14,4 +14,13 @@ interface WriterInterface
      * @param Submission $submission
      */
     public function save(Submission $submission);
+
+    /**
+     * Validate the submission having the given identifier
+     *
+     * @param int $identifier
+     *
+     * @throws \App\Component\Submission\Exceptions\ValidationFailedException
+     */
+    public function validate($identifier);
 }

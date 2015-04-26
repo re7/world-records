@@ -9,3 +9,9 @@ app_main_submission_submit:
 app_main_submission_list:
     path:     /submissions
     defaults: { _controller: AppMainBundle:Submission:list }
+
+app_main_submission_validate:
+    path:     /validate/{identifier}
+    defaults: { _controller: AppMainBundle:Submission:validate }
+    requirements:
+        identifier: \d+

@@ -58,4 +58,24 @@ class SubmissionController extends Controller
             'submissions' => $submissions,
         ]);
     }
+
+    /**
+     * Validate the submission having the given identifier
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function validateAction(Request $request)
+    {
+        $identifier = $request->get('identifier');
+        $this->get('app_main.submission.writer')->validate($identifier);
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            $this->get('translator')->trans('submission.notice.validated')
+        );
+
+        return $this->redirectToRoute('app_main_submission_list');
+    }
 }

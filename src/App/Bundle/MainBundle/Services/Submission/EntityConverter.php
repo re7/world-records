@@ -37,8 +37,7 @@ class EntityConverter
         $submission = new Submission(
             $run,
             $entity->getCreatedAt(),
-            $entity->getUpdatedAt(),
-            $entity->isValidated()
+            $entity->getUpdatedAt()
         );
         $submission->setIdentifier($entity->getId());
 
@@ -67,7 +66,6 @@ class EntityConverter
             ->setDate($run->getDate())
             ->setCreatedAt($submission->getCreatedAt())
             ->setUpdatedAt($submission->getUpdatedAt())
-            ->setValidated($submission->isValidated())
         ;
     }
 }

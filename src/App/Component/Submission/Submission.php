@@ -36,26 +36,17 @@ class Submission
     private $updatedAt;
 
     /**
-     * Whether this submission has been validated
-     *
-     * @var bool
-     */
-    private $validated;
-
-    /**
      * __construct
      *
      * @param Run       $run
      * @param \DateTime $createdAt
      * @param \DateTime $updatedAt
-     * @param bool      $validated
      */
-    public function __construct(Run $run, $createdAt, $updatedAt, $validated = false)
+    public function __construct(Run $run, $createdAt, $updatedAt)
     {
         $this->run       = $run;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
-        $this->validated = $validated;
     }
 
     /**
@@ -153,29 +144,4 @@ class Submission
 
         return $this;
     }
-
-    /**
-     * Get validated
-     *
-     * @return bool
-     */
-    public function isValidated()
-    {
-        return $this->validated;
-    }
-
-    /**
-     * Set validated
-     *
-     * @param bool $validated
-     *
-     * @return self
-     */
-    public function setValidated($validated)
-    {
-        $this->validated = $validated;
-
-        return $this;
-    }
-
 }

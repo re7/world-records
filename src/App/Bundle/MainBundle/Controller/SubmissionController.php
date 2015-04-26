@@ -7,8 +7,18 @@ use App\Bundle\MainBundle\Form\Type\SubmissionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Handle actions about submission
+ */
 class SubmissionController extends Controller
 {
+    /**
+     * Submit a new world record
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function submitAction(Request $request)
     {
         $formSubmission = new FormSubmission();

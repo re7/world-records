@@ -5,4 +5,5 @@ services:
         class: App\Bundle\MainBundle\Services\Submission\SubmissionFactory
         arguments: [@app_main.clock]
     app_main.submission.writer:
-        class: App\Bundle\MainBundle\Services\Submission\SubmissionWriter
+        class: App\Bundle\MainBundle\Services\Submission\DoctrineWriter
+        arguments: [@doctrine.orm.entity_manager]

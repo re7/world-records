@@ -2,7 +2,8 @@
 
 {% block content %}
     {{ form_start(form) }}
-        <input type="submit" value="{{ 'form.submit'|trans }}" />
+        {{ form_rest(form) }}
+        <input type="submit" value="{{ 'form.submit'|trans }}" formnovalidate="formnovalidate" />
         <a href="{{ path('app_main_homepage') }}">{{ 'form.cancel' }}</a>
     {{ form_end(form) }}
 {% endblock %}

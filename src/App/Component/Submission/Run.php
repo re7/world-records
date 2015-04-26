@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\Submission\Run;
+namespace App\Component\Submission;
 
 /**
  * A run and all its details

@@ -1,7 +1,11 @@
 {% extends 'AppMainBundle::layout.html.twig' %}
 
 {% block content %}
-Hello!
-<br />
-You can submit a world record using <a href="{{ path('app_main_submission_submit') }}">this link</a>.
+    <p>Hello!</p>
+    <p>
+        You can submit a world record using <a href="{{ path('app_main_submission_submit') }}">this link</a>.
+    </p>
+    <p>
+        Or you can view all submitted world records <a href="{{ path('app_main_submission_list') }}">here</a>.
+    </p>
 {% endblock %}

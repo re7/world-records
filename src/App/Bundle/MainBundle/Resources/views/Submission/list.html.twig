@@ -1,0 +1,24 @@
+{% extends 'AppMainBundle::layout.html.twig' %}
+
+{% macro runner(player) %}
+    {% if player.link %}<a href="{{ player.link }}">{{ player.name }}</a>{% else %}{{ player.name }}{% endif %}
+{% endmacro %}
+
+{% import _self as macros %}
+
+{% block content %}
+    {% for submission in submissions %}
+        <div>
+            <p>
+                {{ macros.runner(submission.run.player) }}
+                sur <a href="{{ submission.run.links[0] }}">{{ submission.run.game }} - {{ submission.run.category }}</a>,
+                sur {{ submission.run.platform }},
+                en {{ submission.run.time }}{% if submission.run.links|length == 0 %}(pas de vidéo){% endif %}
+                - {{ submission.run.date|date('d/m/Y') }}
+            </p>
+            <div>Soumis le {{ submission.createdAt|date('d/m/Y') }} </div>
+        </div>
+    {% else %}
+        <div>{{ 'submission.list.none'|trans }}</div>
+    {% endfor %}
+{% endblock %}

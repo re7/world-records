@@ -42,4 +42,20 @@ class SubmissionController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * List all submissions waiting for validation
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function listAction()
+    {
+        $reader = $this->get('app_main.submission.reader');
+
+        $submissions = $reader->findAllNotValidated();
+
+        return $this->render('AppMainBundle:Submission:list.html.twig', [
+            'submissions' => $submissions,
+        ]);
+    }
 }

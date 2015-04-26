@@ -6,4 +6,9 @@ services:
         arguments: [@app_main.clock]
     app_main.submission.writer:
         class: App\Bundle\MainBundle\Services\Submission\DoctrineWriter
-        arguments: [@doctrine.orm.entity_manager]
+        arguments: [@doctrine.orm.entity_manager, @app_main.submission.entity_converter]
+    app_main.submission.reader:
+        class: App\Bundle\MainBundle\Services\Submission\DoctrineReader
+        arguments: [@doctrine.orm.entity_manager, @app_main.submission.entity_converter]
+    app_main.submission.entity_converter:
+        class: App\Bundle\MainBundle\Services\Submission\EntityConverter

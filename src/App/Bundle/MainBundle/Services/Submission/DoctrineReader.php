@@ -3,14 +3,14 @@
 namespace App\Bundle\MainBundle\Services\Submission;
 
 use App\Bundle\MainBundle\Entity\Submission as SubmissionEntity;
+use App\Component\Submission\ReaderInterface;
 use App\Component\Submission\Submission;
-use App\Component\Submission\WriterInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Write, edit and delete submissions using Doctrine
+ * Read submissions using Doctrine
  */
-class DoctrineWriter implements WriterInterface
+class DoctrineReader implements ReaderInterface
 {
     /**
      * The configured doctrine entity manager
@@ -41,36 +41,16 @@ class DoctrineWriter implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function save(Submission $submission)
+    public function findAllNotValidated()
     {
-        $entity = $this->find($submission->getIdentifier());
+        $submissions = [];
+        $entities    = $this->getRepository()->findAllNotValidated();
 
-        $this->converter->computeTo($submission, $entity);
-        $this->getRepository()->save($entity);
-
-        $submission->setIdentifier($entity->getId());
-    }
-
-    /**
-     * Find a submission with the given identifier or create a new one if none
-     * is found
-     *
-     * @param int|null $identifier
-     *
-     * @return SubmissionEntity
-     */
-    private function find($identifier = null)
-    {
-        $entity = null;
-
-        if ($identifier !== null) {
-            $entity = $this->getRepository()->find($identifier);
-        }
-        if ($entity === null) {
-            $entity = new SubmissionEntity();
+        foreach ($entities as $entity) {
+            $submissions[] = $this->converter->from($entity);
         }
 
-        return $entity;
+        return $submissions;
     }
 
     /**

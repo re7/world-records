@@ -22,4 +22,20 @@ class SubmissionRepository extends EntityRepository
         $this->getEntityManager()->persist($submission);
         $this->getEntityManager()->flush();
     }
+
+    /**
+     * Retrieve all submissions that are not validated yet
+     *
+     * @return Submission[]
+     */
+    public function findAllNotValidated()
+    {
+        $builder = $this->createQueryBuilder('submission');
+        $builder
+            ->where('submission.validated = FALSE')
+            ->orderBy('submission.createdAt', 'DESC')
+        ;
+
+        return $builder->getQuery()->getResult();
+    }
 }

@@ -19,6 +19,7 @@ class SubmissionRepository extends EntityRepository
      */
     public function save(Submission $submission)
     {
+        $this->getEntityManager()->persist($submission);
         $this->getEntityManager()->flush($submission);
     }
 

@@ -120,7 +120,7 @@ class Submission
      *
      * @ORM\Column(name="validated", type="boolean", nullable=false)
      */
-    private $validated;
+    private $validated = false;
 
     /**
      * Get id

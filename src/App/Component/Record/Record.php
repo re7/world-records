@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Component\Submission;
+namespace App\Component\Record;
 
 use App\Component\Run\Run;
 
 /**
- * A run submission
+ * A world record
  */
-class Submission
+class Record
 {
     /**
      * The unique identifier
@@ -17,38 +17,29 @@ class Submission
     private $identifier;
 
     /**
-     * The run submitted and all its details
+     * The run considered as a world record
      *
      * @var Run
      */
     private $run;
 
     /**
-     * The creation date of this submission
+     * The date at which this record has been added
      *
      * @var \DateTime
      */
     private $createdAt;
 
     /**
-     * The date of the update
-     *
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
      * __construct
      *
      * @param Run       $run
      * @param \DateTime $createdAt
-     * @param \DateTime $updatedAt
      */
-    public function __construct(Run $run, $createdAt, $updatedAt)
+    public function __construct(Run $run, \DateTime $createdAt)
     {
         $this->run       = $run;
         $this->createdAt = $createdAt;
-        $this->updatedAt = $updatedAt;
     }
 
     /**
@@ -119,30 +110,6 @@ class Submission
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return self
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
 
         return $this;
     }

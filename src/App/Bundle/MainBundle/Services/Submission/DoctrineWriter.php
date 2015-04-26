@@ -9,6 +9,7 @@ use App\Component\Submission\Exceptions\ValidationFailedException;
 use App\Component\Submission\Submission;
 use App\Component\Submission\WriterInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Write, edit and delete submissions using Doctrine
@@ -30,15 +31,27 @@ class DoctrineWriter implements WriterInterface
     private $converter;
 
     /**
+     * The Symfony event dispatcher
+     *
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
      * __construct
      *
-     * @param EntityManagerInterface $entityManager
-     * @param EntityConverter        $converter
+     * @param EntityManagerInterface   $entityManager
+     * @param EntityConverter          $converter
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(EntityManagerInterface $entityManager, EntityConverter $converter)
-    {
-        $this->entityManager = $entityManager;
-        $this->converter     = $converter;
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        EntityConverter $converter,
+        EventDispatcherInterface $eventDispatcher
+    ) {
+        $this->entityManager   = $entityManager;
+        $this->converter       = $converter;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**

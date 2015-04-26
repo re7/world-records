@@ -4,8 +4,8 @@ namespace App\Bundle\MainBundle\Services\Submission;
 
 use App\Bundle\MainBundle\Form\Model\Submission as FormSubmission;
 use App\Component\Clock\Clock;
-use App\Component\Submission\Player;
-use App\Component\Submission\Run;
+use App\Component\Run\Player;
+use App\Component\Run\Run;
 use App\Component\Submission\Submission;
 
 /**

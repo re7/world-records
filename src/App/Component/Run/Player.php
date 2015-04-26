@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Component\Submission;
+namespace App\Component\Run;
 
 /**
  * A player and its details

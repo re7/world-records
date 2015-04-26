@@ -3,8 +3,8 @@
 namespace App\Bundle\MainBundle\Services\Submission;
 
 use App\Bundle\MainBundle\Entity\Submission as SubmissionEntity;
-use App\Component\Submission\Player;
-use App\Component\Submission\Run;
+use App\Component\Run\Player;
+use App\Component\Run\Run;
 use App\Component\Submission\Submission;
 
 /**

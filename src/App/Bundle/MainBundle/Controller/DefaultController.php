@@ -8,6 +8,10 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('AppMainBundle:Default:index.html.twig');
+        $records = $this->get('app_main.record.reader')->findAll();
+
+        return $this->render('AppMainBundle:Default:index.html.twig', [
+            'records' => $records,
+        ]);
     }
 }

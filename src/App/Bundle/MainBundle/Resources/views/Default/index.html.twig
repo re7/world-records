@@ -1,11 +1,27 @@
 {% extends 'AppMainBundle::layout.html.twig' %}
 
+{% macro runner(player) %}
+    {% if player.link %}<a href="{{ player.link }}">{{ player.name }}</a>{% else %}{{ player.name }}{% endif %}
+{% endmacro %}
+
+{% import _self as macros %}
+
 {% block content %}
-    <p>Hello!</p>
     <p>
-        You can submit a world record using <a href="{{ path('app_main_submission_submit') }}">this link</a>.
+        Vous pouvez soumettre un record du monde en suivant <a href="{{ path('app_main_submission_submit') }}">ce lien</a>.
     </p>
     <p>
-        Or you can view all submitted world records <a href="{{ path('app_main_submission_list') }}">here</a>.
+        Ou vous pouvez voir la liste des records en attente de validation <a href="{{ path('app_main_submission_list') }}">ici</a>.
     </p>
+    <div>
+        {% for record in records %}
+            <p>
+                {{ macros.runner(record.run.player) }}
+                sur <a href="{{ record.run.links[0] }}">{{ record.run.game }} - {{ record.run.category }}</a>,
+                sur {{ record.run.platform }},
+                en {{ record.run.time }}{% if record.run.links|length == 0 %}(pas de vidéo){% endif %}
+                - {{ record.run.date|date('d/m/Y') }}
+            </p>
+        {% endfor %}
+    </div>
 {% endblock %}

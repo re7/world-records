@@ -2,10 +2,14 @@
 
 namespace App\Bundle\MainBundle\Controller;
 
+use App\Bundle\MainBundle\Form\Model\Link;
+use App\Bundle\MainBundle\Form\Type\LinkType;
 use App\Bundle\MainBundle\Form\Model\Submission as FormSubmission;
 use App\Bundle\MainBundle\Form\Type\SubmissionType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestException;
 
 /**
  * Handle actions about submission
@@ -21,6 +25,8 @@ class SubmissionController extends Controller
      */
     public function submitAction(Request $request)
     {
+        $link           = new Link();
+        $linkForm       = $this->createForm(new LinkType(), $link);
         $formSubmission = new FormSubmission();
         $form           = $this->createForm(new SubmissionType(), $formSubmission);
 
@@ -39,7 +45,8 @@ class SubmissionController extends Controller
         }
 
         return $this->render('AppMainBundle:Submission:submit.html.twig', [
-            'form' => $form->createView(),
+            'form'     => $form->createView(),
+            'linkForm' => $linkForm->createView(),
         ]);
     }
 
@@ -77,5 +84,29 @@ class SubmissionController extends Controller
         );
 
         return $this->redirectToRoute('app_main_submission_list');
+    }
+
+    /**
+     * Autocomplete a submission
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function autocompleteAction(Request $request)
+    {
+        $link = new Link();
+        $form = $this->createForm(new LinkType(), $link);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // @TODO Retrieve and format known data from the given link
+            $data = ['link' => $link->getUrl()];
+
+            return new JsonResponse($data);
+        }
+
+        throw new BadRequestException();
     }
 }

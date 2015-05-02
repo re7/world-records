@@ -3,7 +3,7 @@
 namespace App\Bundle\MainBundle\Entity\Security;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
+use FOS\UserBundle\Entity\User as BaseUser;
 
 /**
  * The security user

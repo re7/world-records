@@ -101,8 +101,21 @@ class SubmissionController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // @TODO Retrieve and format known data from the given link
-            $data = ['link' => $link->getUrl()];
+            $autocompleter = $this->get('app_main.submission.autocompleter');
+            $submission    = $autocompleter->autocomplete($link->getUrl());
+
+            $data = [
+                'playerName' => $submission->getPlayerName(),
+                'playerLink' => $submission->getPlayerLink(),
+                'game'       => $submission->getGame(),
+                'category'   => $submission->getCategory(),
+                'link'       => $submission->getLink(),
+                'platform'   => $submission->getPlatform(),
+                'time'       => $submission->getTime(),
+                'dateYear'   => $submission->getDate()->format('Y'),
+                'dateMonth'  => $submission->getDate()->format('m'),
+                'dateDay'    => $submission->getDate()->format('d'),
+            ];
 
             return new JsonResponse($data);
         }

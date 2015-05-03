@@ -25,3 +25,10 @@ services:
         arguments: [@app_main.record.writer, @app_main.clock]
         tags:
             - { name: kernel.event_subscriber }
+    app_main.submission.autocompleter:
+        class: App\Bundle\MainBundle\Services\Autocompleter\BusAutocompleter
+        arguments: [@app_main.clock]
+    app_main.submission.autocompleter.handler.speedruncom:
+        class: App\Bundle\MainBundle\Services\Autocompleter\Handler\SpeedruncomHandler
+        tags:
+            - { name: app_main.submission.autocompleter }

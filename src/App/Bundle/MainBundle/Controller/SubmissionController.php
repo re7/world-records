@@ -113,8 +113,8 @@ class SubmissionController extends Controller
                 'platform'   => $submission->getPlatform(),
                 'time'       => $submission->getTime(),
                 'dateYear'   => $submission->getDate()->format('Y'),
-                'dateMonth'  => $submission->getDate()->format('m'),
-                'dateDay'    => $submission->getDate()->format('d'),
+                'dateMonth'  => $submission->getDate()->format('n'),
+                'dateDay'    => $submission->getDate()->format('j'),
             ];
 
             return new JsonResponse($data);

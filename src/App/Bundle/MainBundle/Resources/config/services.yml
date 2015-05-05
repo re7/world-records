@@ -30,5 +30,6 @@ services:
         arguments: [@app_main.clock]
     app_main.submission.autocompleter.handler.speedruncom:
         class: App\Bundle\MainBundle\Services\Autocompleter\Handler\SpeedruncomHandler
+        arguments: [@guzzle.client]
         tags:
             - { name: app_main.submission.autocompleter }

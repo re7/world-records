@@ -68,11 +68,121 @@ class SpeedruncomHandler implements HandlerInterface
     {
         $crawler = new Crawler($content);
 
-        $title = $crawler->filter('main .sidemenu h2')->text();
-        $category = $crawler->filter('main .maincontent h2')->eq(0)->text();
-        $playerName = ucfirst($crawler->filter('main .maincontent h2')->eq(1)->filter('span')->eq(1)->text());
+        list($playerName, $playerLink) = $this->getPlayerData($crawler);
+        $title = $crawler->filter('#titleheader')->text();
+        $description = $crawler->filter('main .maincontent h2')->eq(0)->text();
+        list($category, $time) = $this->parseDescription($description);
+        $note = $crawler->filter('main .maincontent .note')->text();
+        list($platform, $date) = $this->parseNote($note);
+        $link = $this->getVideoLink($crawler);
 
-        $submission->setGame($title);
         $submission->setPlayerName($playerName);
+        $submission->setPlayerLink($playerLink);
+        $submission->setGame($title);
+        $submission->setCategory($category);
+        $submission->setLink($link);
+        $submission->setTime($time);
+        $submission->setPlatform($platform);
+        if ($date !== null) {
+            $submission->setDate($date);
+        }
+    }
+
+    /**
+     * Retrieve the player's name and profile URL
+     *
+     * @param Crawler $crawler
+     *
+     * @return array
+     */
+    private function getPlayerData(Crawler $crawler)
+    {
+        $linkNode = $crawler->filter('main .maincontent h2')->eq(1)->filter('a')->first()->getNode(0);
+        if ($linkNode) {
+            $username = $crawler->filter('main .maincontent h2')->eq(1)->filter('span')->eq(1)->text();
+            $href     = $crawler->filter('main .maincontent h2')->eq(1)->filter('a')->first()->attr('href');
+
+            return [
+                ucfirst($username),
+                sprintf('http://www.speedrun.com%s', $href),
+            ];
+        }
+
+        return [
+            ucfirst($crawler->filter('main .maincontent h2')->eq(1)->text()),
+            '',
+        ];
+    }
+
+    /**
+     * Retrieve the URL of the twitch video used as proof if there is one
+     *
+     * @param Crawler $crawler
+     *
+     * @return string
+     */
+    private function getVideoLink(Crawler $crawler)
+    {
+        $twitchNode = $crawler->filter('main .maincontent object.twitch param[name=flashvars]')->first()->getNode(0);
+        if ($twitchNode) {
+            $info = $twitchNode->getAttribute('value');
+            $pattern = '/^channel=(?P<channel>\w+)(?:&\w+=\w+)+&videoId=(?P<type>\w)(?P<identifier>\d+)$/';
+            $matches = [];
+            preg_match($pattern, $info, $matches);
+
+            $channel = $matches['channel'];
+            $type = $matches['type'];
+            $identifier = $matches['identifier'];
+
+            return sprintf('http://www.twitch.tv/%s/%s/%s', $channel, $type, $identifier);
+        }
+
+        return '';
+    }
+
+    /**
+     * Parse the description string to retrieve the category and the time
+     *
+     * @param string $description
+     *
+     * @return array
+     */
+    private function parseDescription($description)
+    {
+        $pattern = '/^(?P<category>.*)\s+in\s+(?:(?P<hour>\d+)h\s+)?(?:(?P<minute>\d+)m\s+)?(?:(?P<second>\d+)s\s+)(?:(?P<milli>\d+)ms\s+)?(?:\*\s+)?by:$/';
+        $matches = [];
+        preg_match($pattern, $description, $matches);
+
+        $category = $matches['category'];
+        $hour = isset($matches['hour']) ? $matches['hour'] : 0;
+        $minute = isset($matches['minute']) ? $matches['minute'] : 0;
+        $second = $matches['second'];
+        $milli = isset($matches['milli']) ? $matches['milli'] : null;
+
+        $time = sprintf('%02d:%02d:%02d', $hour, $minute, $second);
+        if ($milli !== null) {
+            $time = sprintf('%s.%03d', $time, $milli);
+        }
+
+        return [$category, $time];
+    }
+
+    /**
+     * Parse the note string to retrieve the platform and date
+     *
+     * @param string $note
+     *
+     * @return array
+     */
+    private function parseNote($note)
+    {
+        $pattern = '/^ Played on (?P<platform>[\w ]*)(?: \[\w+\] )?(?:on (?P<date>\d{4}-\d{2}-\d{2}))?\./';
+        $matches = [];
+        preg_match($pattern, $note, $matches);
+
+        $platform = $matches['platform'];
+        $date     = (isset($matches['date']) ? new \DateTime($matches['date']) : null);
+
+        return [$platform, $date];
     }
 }

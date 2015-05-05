@@ -18,10 +18,14 @@ class SubmissionType extends AbstractType
     {
         $builder
             ->add('playerName', 'text')
-            ->add('playerLink', 'url')
+            ->add('playerLink', 'url', [
+                'required' => false,
+            ])
             ->add('game', 'text')
             ->add('category', 'text')
-            ->add('link', 'url')
+            ->add('link', 'url', [
+                'required' => false,
+            ])
             ->add('platform', 'text')
             ->add('time', 'text')
             ->add('date', 'date')

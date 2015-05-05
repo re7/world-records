@@ -99,12 +99,13 @@ class SpeedruncomHandler implements HandlerInterface
     {
         $linkNode = $crawler->filter('main .maincontent h2')->eq(1)->filter('a')->first()->getNode(0);
         if ($linkNode) {
-            $username = $crawler->filter('main .maincontent h2')->eq(1)->filter('span')->eq(1)->text();
-            $href     = $crawler->filter('main .maincontent h2')->eq(1)->filter('a')->first()->attr('href');
+            $username  = $crawler->filter('main .maincontent h2')->eq(1)->filter('span')->eq(1)->text();
+            $link      = sprintf('http://www.speedrun.com/user/%s', $username);
+            $twitchUrl = $this->retrieveProfile($link);
 
             return [
                 ucfirst($username),
-                sprintf('http://www.speedrun.com%s', $href),
+                ($twitchUrl ?: $link),
             ];
         }
 
@@ -184,5 +185,29 @@ class SpeedruncomHandler implements HandlerInterface
         $date     = (isset($matches['date']) ? new \DateTime($matches['date']) : null);
 
         return [$platform, $date];
+    }
+
+    /**
+     * Send a request to the user page to retrieve its most important social
+     * profile URL (often it should be Twitch)
+     *
+     * @param string $url
+     *
+     * @return string|null
+     */
+    private function retrieveProfile($url)
+    {
+        $request  = $this->client->get($url);
+        $response = $request->send();
+
+        if ($response->getStatusCode() === 200) {
+            $crawler = new Crawler($response->getBody(true));
+            $firstProfile = $crawler->filter('main .sidemenu>div a')->eq(1);
+            if ($firstProfile->getNode(0)) {
+                return $firstProfile->attr('href');
+            }
+        }
+
+        return null;
     }
 }

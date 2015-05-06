@@ -5,3 +5,18 @@ app_main_homepage:
 app_main_submission_submit:
     path:     /submit
     defaults: { _controller: AppMainBundle:Submission:submit }
+
+app_main_submission_list:
+    path:     /submissions
+    defaults: { _controller: AppMainBundle:Submission:list }
+
+app_main_submission_validate:
+    path:     /validate/{identifier}
+    defaults: { _controller: AppMainBundle:Submission:validate }
+    requirements:
+        identifier: \d+
+
+app_main_submission_autocomplete:
+    path:     /autocomplete
+    defaults: { _controller: AppMainBundle:Submission:autocomplete }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"

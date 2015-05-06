@@ -1,8 +1,27 @@
 {% extends 'AppMainBundle::layout.html.twig' %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '@AppMainBundle/Resources/public/js/jquery.form-3.51.0.min.js'
+        '@AppMainBundle/Resources/public/js/submission/main.js'
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
 {% block content %}
-    {{ form_start(form) }}
-        <input type="submit" value="{{ 'form.submit'|trans }}" />
-        <a href="{{ path('app_main_homepage') }}">{{ 'form.cancel' }}</a>
-    {{ form_end(form) }}
+    <div>
+        {{ form_start(linkForm, {action: path('app_main_submission_autocomplete'), attr: {'data-ajax-form': true}}) }}
+            {{ form_rest(linkForm) }}
+            <input type="submit" value="{{ 'form.submit'|trans }}" />
+        {{ form_end(linkForm) }}
+    </div>
+    <div>
+        {{ form_start(form) }}
+            {{ form_rest(form) }}
+            <input type="submit" value="{{ 'form.submit'|trans }}" />
+            <a href="{{ path('app_main_homepage') }}">{{ 'form.cancel' }}</a>
+        {{ form_end(form) }}
+    </div>
 {% endblock %}

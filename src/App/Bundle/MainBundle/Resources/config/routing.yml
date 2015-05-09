@@ -1,3 +1,7 @@
+app_main_security:
+    resource: "@AppMainBundle/Resources/config/Security/routing.yml"
+    prefix:   /
+
 app_main_homepage:
     path:     /
     defaults: { _controller: AppMainBundle:Default:index }

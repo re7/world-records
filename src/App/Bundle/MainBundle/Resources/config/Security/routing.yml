@@ -1,0 +1,7 @@
+login_route:
+    path: /login
+    defaults: { _controller: AppMainBundle:Security:login }
+
+login_check:
+    path: /login_check
+    defaults: { _controller: AppMainBundle:Security:loginCheck }

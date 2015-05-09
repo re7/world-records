@@ -8,9 +8,12 @@ namespace App\Component\Record;
 interface ReaderInterface
 {
     /**
-     * Retrieve all existing world records
+     * Retrieve an array of world records having the given identifiers, indexed
+     * by identifier
+     *
+     * @param int[]
      *
      * @return Record[]
      */
-    public function findAll();
+    public function find(array $identifiers);
 }

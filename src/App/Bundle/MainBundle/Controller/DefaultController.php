@@ -8,10 +8,52 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $records = $this->get('app_main.record.reader')->findAll();
+        $elements    = $this->get('app_main.record.lister.date')->get();
+        $identifiers = $this->getIdentifiers($elements);
+        $records     = $this->get('app_main.record.reader')->find($identifiers);
+
+        $orderedRecords = $this->getOrderedRecords($elements, $records);
 
         return $this->render('AppMainBundle:Default:index.html.twig', [
-            'records' => $records,
+            'records' => $orderedRecords,
         ]);
+    }
+
+    /**
+     * Retrieve record identifiers from the given elements array
+     *
+     * @param \App\Component\Lister\Element[] $elements
+     *
+     * @return int[]
+     */
+    private function getIdentifiers(array $elements)
+    {
+        $identifiers = [];
+
+        foreach ($elements as $element) {
+            $identifiers[] = $element->getIdentifier();
+        }
+
+        return $identifiers;
+    }
+
+    /**
+     * Construct the list of ordered records using elements to get the order and
+     * records to get objects
+     *
+     * @param int[]                          $elements
+     * @param \App\Component\Record\Record[] $records
+     *
+     * @param \App\Component\Record\Record[]
+     */
+    private function getOrderedRecords(array $elements, array $records)
+    {
+        $orderedRecords = [];
+
+        foreach ($elements as $element) {
+            $orderedRecords[] = $records[$element->getIdentifier()];
+        }
+
+        return $orderedRecords;
     }
 }

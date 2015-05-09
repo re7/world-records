@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
+- Paginate world records on the homepage and sort them by creation date
 
 ### Changed
 

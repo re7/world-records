@@ -127,15 +127,14 @@ class SpeedruncomHandler implements HandlerInterface
         $twitchNode = $crawler->filter('main .maincontent object.twitch param[name=flashvars]')->first()->getNode(0);
         if ($twitchNode) {
             $info = $twitchNode->getAttribute('value');
-            $pattern = '/^channel=(?P<channel>\w+)(?:&\w+=\w+)+&videoId=(?P<type>\w)(?P<identifier>\d+)$/';
+            $pattern = '/^channel=(?P<channel>\w+)(?:&\w+=\w+)+&(?:(?:videoId=v(?P<video>\d+))|(?:chapter_id=(?P<chapter>\d+)))$/';
             $matches = [];
             preg_match($pattern, $info, $matches);
 
             $channel = $matches['channel'];
-            $type = $matches['type'];
-            $identifier = $matches['identifier'];
+            $url = ($matches['video'] !== '' ? 'v/'.$matches['video'] : 'c/'.$matches['chapter']);
 
-            return sprintf('http://www.twitch.tv/%s/%s/%s', $channel, $type, $identifier);
+            return sprintf('http://www.twitch.tv/%s/%s', $channel, $url);
         }
 
         return '';

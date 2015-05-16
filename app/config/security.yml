@@ -1,5 +1,11 @@
 security:
+    encoders:
+        App\Bundle\MainBundle\Security\User\User:
+            algorithm: bcrypt
+            cost: 12
     providers:
+        user:
+            id: app_main.security.user.user_provider
         in_memory:
             memory: ~
 

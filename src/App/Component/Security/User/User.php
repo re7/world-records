@@ -1,25 +1,16 @@
 <?php
 
-namespace App\Bundle\MainBundle\Entity\Security;
-
-use Doctrine\ORM\Mapping as ORM;
+namespace App\Component\Security\User;
 
 /**
- * The security user
- *
- * @ORM\Entity(repositoryClass="App\Bundle\MainBundle\Entity\Security\UserRepository")
- * @ORM\Table(name="security_user")
+ * A security user
  */
 class User
 {
     /**
      * The unique identifier
      *
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @var int|null
      */
     private $identifier;
 
@@ -27,8 +18,6 @@ class User
      * The unique username
      *
      * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
      */
     private $username;
 
@@ -36,19 +25,33 @@ class User
      * The encoded password of this user
      *
      * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 
     /**
-     * Get identifier
+     * __construct
      *
-     * @return int
+     * @param string $username
+     * @param string $password
      */
-    public function getIdentifier()
+    public function __construct($username, $password)
     {
-        return $this->identifier;
+        $this->username = $username;
+        $this->password = $password;
+    }
+
+    /**
+     * Set identifier
+     *
+     * @param int|null $identifier
+     *
+     * @return self
+     */
+    public function setIdentifier($identifier = null)
+    {
+        $this->identifier = $identifier;
+
+        return $this;
     }
 
     /**

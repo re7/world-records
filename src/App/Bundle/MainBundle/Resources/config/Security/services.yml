@@ -1,0 +1,7 @@
+services:
+    app_main.security.user.reader:
+        class: App\Bundle\MainBundle\Services\Security\User\DoctrineReader
+        arguments: [@doctrine.orm.entity_manager]
+    app_main.security.user.user_provider:
+        class: App\Bundle\MainBundle\Security\User\UserProvider
+        arguments: [@app_main.security.user.reader]

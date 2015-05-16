@@ -38,6 +38,7 @@ class DoctrineReader implements ReaderInterface
         if ($entity === null) {
             return null;
         }
+
         $user = new User(
             $entity->getUsername(),
             $entity->getPassword()

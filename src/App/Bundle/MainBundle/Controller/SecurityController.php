@@ -2,7 +2,10 @@
 
 namespace App\Bundle\MainBundle\Controller;
 
+use App\Bundle\MainBundle\Form\Model\Security\Registration;
+use App\Bundle\MainBundle\Form\Type\Security\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Handle security actions
@@ -39,5 +42,35 @@ class SecurityController extends Controller
      */
     public function loginCheckAction()
     {
+    }
+
+    /**
+     * Send a confirmation email to create a new user account
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function registerAction(Request $request)
+    {
+        $registration = new Registration();
+        $form         = $this->createForm(new RegistrationType(), $registration);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // @TODO Send the confirmation email
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('security.register.notice.confirm')
+            );
+
+            return $this->redirectToRoute('app_main_homepage');
+        }
+
+        return $this->render('AppMainBundle:Security:register.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

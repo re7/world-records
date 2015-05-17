@@ -5,3 +5,8 @@ services:
     app_main.security.user.user_provider:
         class: App\Bundle\MainBundle\Security\User\UserProvider
         arguments: [@app_main.security.user.reader]
+    validator.app_main.security.registration.unique_email:
+        class: App\Bundle\MainBundle\Validator\Constraints\Security\Registration\UniqueEmailValidator
+        arguments: [@app_main.security.user.reader]
+        tags:
+            - { name: validator.constraint_validator, alias: app_main_security_registration_unique_email }

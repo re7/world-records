@@ -26,6 +26,7 @@ class Registration
      * @var string
      *
      * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
      */
     public $password;
 }

@@ -1,3 +1,6 @@
+parameters:
+    app_main.security.registration.hash_secret: %hash_secret%
+
 services:
     app_main.security.user.reader:
         class: App\Bundle\MainBundle\Services\Security\User\DoctrineReader
@@ -5,6 +8,9 @@ services:
     app_main.security.user.user_provider:
         class: App\Bundle\MainBundle\Security\User\UserProvider
         arguments: [@app_main.security.user.reader]
+    app_main.security.registration.hash_generator:
+        class: App\Component\Security\Registration\HMACHashGenerator
+        arguments: ['%app_main.security.registration.hash_secret%']
     validator.app_main.security.registration.unique_email:
         class: App\Bundle\MainBundle\Validator\Constraints\Security\Registration\UniqueEmailValidator
         arguments: [@app_main.security.user.reader]

@@ -4,6 +4,7 @@ namespace App\Bundle\MainBundle\Controller;
 
 use App\Bundle\MainBundle\Form\Model\Security\Registration;
 use App\Bundle\MainBundle\Form\Type\Security\RegistrationType;
+use App\Bundle\MainBundle\Security\User\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -59,7 +60,7 @@ class SecurityController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // @TODO Send the confirmation email
+            $this->sendConfirmationEmail($registration);
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
@@ -72,5 +73,39 @@ class SecurityController extends Controller
         return $this->render('AppMainBundle:Security:register.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Send the confirmation email for the given registration
+     *
+     * @param Registration $registration
+     */
+    private function sendConfirmationEmail(Registration $registration)
+    {
+        $encoder         = $this->container->get('security.password_encoder');
+        $encodedPassword = $encoder->encodePassword(
+            new User(null, null, null, []),
+            $registration->password
+        );
+        $hasher          = $this->container->get('app_main.security.registration.hash_generator');
+        $securityToken   = $hasher->hash($registration->email, $encodedPassword);
+
+        $subject = $this->get('translator')->trans('security.registration.confirmation_email.title');
+        $content = $this->renderView(
+            'AppMainBundle:Security:Registration/confirmationEmail.html.twig',
+            [
+                'email'         => $registration->email,
+                'password'      => $encodedPassword,
+                'securityToken' => $securityToken,
+            ]
+        );
+
+        $message = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setFrom('wr@re-7.com')
+            ->setTo($registration->email)
+            ->setBody($content)
+        ;
+        $this->get('mailer')->send($message);
     }
 }

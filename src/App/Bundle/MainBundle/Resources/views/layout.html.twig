@@ -1,21 +1,46 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
+    {% stylesheets
+        '@AppMainBundle/Resources/public/css/bootstrap.min.css'
+        '@AppMainBundle/Resources/public/css/bootstrap-theme.min.css'
+        '@AppMainBundle/Resources/public/css/main.css'
+    %}
+        <link href="{{ asset_url }}" rel="stylesheet" />
+    {% endstylesheets %}
 {% endblock %}
 
 {% block javascripts %}
-    {% javascripts '@AppMainBundle/Resources/public/js/jquery-2.1.3.min.js' %}
+    {% javascripts
+        '@AppMainBundle/Resources/public/js/jquery-2.1.3.min.js'
+        '@AppMainBundle/Resources/public/js/bootstrap.min.js'
+    %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
 
 {% block body %}
-    {% block flashMessage %}
-        {% for flashMessage in app.session.flashbag.get('notice') %}
-            <div class="flash-notice">
-                {{ flashMessage }}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ path('app_main_homepage') }}">World Records</a>
             </div>
-        {% endfor %}
-    {% endblock %}
-    {% block content %}{% endblock %}
+            <div id="navbar" class="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ path('app_main_submission_submit') }}">Soumettre un record</a></li>
+                    <li><a href="{{ path('app_main_submission_list') }}">En attente</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block flashMessage %}
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-info">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
+        {% endblock %}
+        {% block content %}{% endblock %}
+    </div>
 {% endblock %}

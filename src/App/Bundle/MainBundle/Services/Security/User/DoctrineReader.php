@@ -66,7 +66,7 @@ class DoctrineReader implements ReaderInterface
      *
      * @return User
      */
-    private function createUserFromEntity(UserEntity $entity)
+    private function createUserFromEntity(UserEntity $entity = null)
     {
         if ($entity === null) {
             return null;

@@ -72,7 +72,7 @@ class SpeedruncomHandler implements HandlerInterface
         $title = $crawler->filter('#titleheader')->text();
         $description = $crawler->filter('main .maincontent h2')->eq(0)->text();
         list($category, $time) = $this->parseDescription($description);
-        $note = $crawler->filter('main .maincontent .note')->text();
+        $note = $crawler->filter('main .maincontent footer.note')->text();
         list($platform, $date) = $this->parseNote($note);
         $link = $this->getVideoLink($crawler);
 
@@ -125,6 +125,7 @@ class SpeedruncomHandler implements HandlerInterface
     private function getVideoLink(Crawler $crawler)
     {
         $twitchNode = $crawler->filter('main .maincontent object.twitch param[name=flashvars]')->first()->getNode(0);
+        $youtubeNode = $crawler->filter('main .maincontent iframe.youtube')->first()->getNode(0);
         if ($twitchNode) {
             $info = $twitchNode->getAttribute('value');
             $pattern = '/^channel=(?P<channel>\w+)(?:&\w+=\w+)+&(?:(?:videoId=v(?P<video>\d+))|(?:chapter_id=(?P<chapter>\d+)))$/';
@@ -135,6 +136,13 @@ class SpeedruncomHandler implements HandlerInterface
             $url = ($matches['video'] !== '' ? 'v/'.$matches['video'] : 'c/'.$matches['chapter']);
 
             return sprintf('http://www.twitch.tv/%s/%s', $channel, $url);
+        } elseif ($youtubeNode) {
+            $info = $youtubeNode->getAttribute('src');
+            $pattern = '/^(http)?(\/\/)?www\.youtube\.com\/embed\/(?P<video>\w+)(\?autoplay=0)?$/';
+            $matches = [];
+            preg_match($pattern, $info, $matches);
+
+            return sprintf('https://www.youtube.com/watch?v=%s', $matches['video']);
         }
 
         return '';

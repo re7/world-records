@@ -2,6 +2,7 @@
 
 namespace App\Bundle\MainBundle\Services\Security\User;
 
+use App\Bundle\MainBundle\Entity\Security\User as UserEntity;
 use App\Component\Security\User\ReaderInterface;
 use App\Component\Security\User\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,17 +36,7 @@ class DoctrineReader implements ReaderInterface
     {
         $entity = $this->getRepository()->findByUsername($username);
 
-        if ($entity === null) {
-            return null;
-        }
-
-        $user = new User(
-            $entity->getUuid(),
-            $entity->getUsername(),
-            $entity->getPassword()
-        );
-
-        return $user;
+        return $this->createUserFromEntity($entity);
     }
 
     /**
@@ -55,17 +46,7 @@ class DoctrineReader implements ReaderInterface
     {
         $entity = $this->getRepository()->findByUuid($identifier);
 
-        if ($entity === null) {
-            return null;
-        }
-
-        $user = new User(
-            $entity->getUuid(),
-            $entity->getUsername(),
-            $entity->getPassword()
-        );
-
-        return $user;
+        return $this->createUserFromEntity($entity);
     }
 
     /**
@@ -76,5 +57,28 @@ class DoctrineReader implements ReaderInterface
     private function getRepository()
     {
         return $this->entityManager->getRepository('AppMainBundle:Security\User');
+    }
+
+    /**
+     * Create a security user from the given entity
+     *
+     * @param UserEntity $entity
+     *
+     * @return User
+     */
+    private function createUserFromEntity(UserEntity $entity)
+    {
+        if ($entity === null) {
+            return null;
+        }
+
+        $user = new User(
+            $entity->getUuid(),
+            $entity->getUsername(),
+            $entity->getPassword(),
+            $entity->isModerator()
+        );
+
+        return $user;
     }
 }

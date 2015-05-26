@@ -4,10 +4,13 @@ parameters:
 services:
     app_main.security.command_bus:
         class: App\Component\Command\Bus
-        arguments: [[@app_main.security.registration.confirm_handler]]
+        arguments: [[@app_main.security.registration.confirm_handler, @app_main.security.registration.promote_handler]]
     app_main.security.registration.confirm_handler:
         class: App\Component\Security\Registration\ConfirmHandler
         arguments: [@app_main.security.user.writer, @app_main.security.registration.hash_generator]
+    app_main.security.registration.promote_handler:
+        class: App\Component\Security\User\PromoteHandler
+        arguments: [@app_main.security.user.writer]
     app_main.security.registration.hash_generator:
         class: App\Component\Security\Registration\HMACHashGenerator
         arguments: ['%app_main.security.registration.hash_secret%']

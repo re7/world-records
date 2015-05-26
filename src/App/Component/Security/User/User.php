@@ -29,16 +29,26 @@ class User
     private $password;
 
     /**
+     * Whether this user is a moderator
+     *
+     * @var bool
+     */
+    private $moderator;
+
+    /**
      * __construct
      *
+     * @param string $identifier
      * @param string $username
      * @param string $password
+     * @param bool   $moderator
      */
-    public function __construct($identifier, $username, $password)
+    public function __construct($identifier, $username, $password, $moderator = false)
     {
         $this->identifier = $identifier;
         $this->username   = $username;
         $this->password   = $password;
+        $this->moderator  = $moderator;
     }
 
     /**
@@ -69,5 +79,15 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Get moderator
+     *
+     * @return bool
+     */
+    public function isModerator()
+    {
+        return $this->moderator;
     }
 }

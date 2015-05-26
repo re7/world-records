@@ -51,6 +51,15 @@ class User
     private $password;
 
     /**
+     * Whether the user is a moderator
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="moderator", type="boolean")
+     */
+    private $moderator;
+
+    /**
      * Get uuid
      *
      * @return string
@@ -118,6 +127,30 @@ class User
     public function setPassword($password)
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get moderator
+     *
+     * @return bool
+     */
+    public function isModerator()
+    {
+        return $this->moderator;
+    }
+
+    /**
+     * Set moderator
+     *
+     * @param bool $moderator
+     *
+     * @return self
+     */
+    public function setModerator($moderator)
+    {
+        $this->moderator = $moderator;
 
         return $this;
     }

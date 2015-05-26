@@ -40,10 +40,30 @@ class DoctrineReader implements ReaderInterface
         }
 
         $user = new User(
+            $entity->getUuid(),
             $entity->getUsername(),
             $entity->getPassword()
         );
-        $user->setIdentifier($entity->getIdentifier());
+
+        return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findByIdentifier($identifier)
+    {
+        $entity = $this->getRepository()->findByUuid($identifier);
+
+        if ($entity === null) {
+            return null;
+        }
+
+        $user = new User(
+            $entity->getUuid(),
+            $entity->getUsername(),
+            $entity->getPassword()
+        );
 
         return $user;
     }

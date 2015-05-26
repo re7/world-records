@@ -29,4 +29,22 @@ class UserRepository extends EntityRepository
 
         return $builder->getQuery()->getOneOrNullResult();
     }
+
+    /**
+     * Retrieve the user having the given uuid
+     *
+     * @param string $uuid
+     *
+     * @return User|null
+     */
+    public function findByUuid($uuid)
+    {
+        $builder = $this->createQueryBuilder('user');
+        $builder
+            ->where('user.uuid = :uuid')
+            ->setParameter('uuid', $uuid)
+        ;
+
+        return $builder->getQuery()->getOneOrNullResult();
+    }
 }

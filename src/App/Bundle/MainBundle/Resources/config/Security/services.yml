@@ -2,15 +2,24 @@ parameters:
     app_main.security.registration.hash_secret: %hash_secret%
 
 services:
+    app_main.security.command_bus:
+        class: App\Component\Command\Bus
+        arguments: [[@app_main.security.registration.confirm_handler]]
+    app_main.security.registration.confirm_handler:
+        class: App\Component\Security\Registration\ConfirmHandler
+        arguments: [@app_main.security.user.writer, @app_main.security.registration.hash_generator]
+    app_main.security.registration.hash_generator:
+        class: App\Component\Security\Registration\HMACHashGenerator
+        arguments: ['%app_main.security.registration.hash_secret%']
     app_main.security.user.reader:
         class: App\Bundle\MainBundle\Services\Security\User\DoctrineReader
+        arguments: [@doctrine.orm.entity_manager]
+    app_main.security.user.writer:
+        class: App\Bundle\MainBundle\Services\Security\User\DoctrineWriter
         arguments: [@doctrine.orm.entity_manager]
     app_main.security.user.user_provider:
         class: App\Bundle\MainBundle\Security\User\UserProvider
         arguments: [@app_main.security.user.reader]
-    app_main.security.registration.hash_generator:
-        class: App\Component\Security\Registration\HMACHashGenerator
-        arguments: ['%app_main.security.registration.hash_secret%']
     validator.app_main.security.registration.unique_email:
         class: App\Bundle\MainBundle\Validator\Constraints\Security\Registration\UniqueEmailValidator
         arguments: [@app_main.security.user.reader]

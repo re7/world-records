@@ -5,6 +5,8 @@ namespace App\Bundle\MainBundle\Controller;
 use App\Bundle\MainBundle\Form\Model\Security\Registration;
 use App\Bundle\MainBundle\Form\Type\Security\RegistrationType;
 use App\Bundle\MainBundle\Security\User\User;
+use App\Component\Security\Registration\ConfirmCommand;
+use Rhumsaa\Uuid\Uuid;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -76,6 +78,42 @@ class SecurityController extends Controller
     }
 
     /**
+     * Confirm a registration
+     *
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function confirmAction(Request $request)
+    {
+        $email         = $request->get('email');
+        $password      = $request->get('password');
+        $securityToken = $request->get('token');
+
+        $uuid    = Uuid::uuid1()->toString();
+        $command = new ConfirmCommand($uuid, $email, $password, $securityToken);
+        $bus     = $this->getCommandBus();
+        $bus->launch($command);
+
+        $reader = $this->getReader();
+        if (!$reader->findByIdentifier($uuid)) {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('security.register.notice.failed')
+            );
+
+            return $this->redirectToRoute('app_main_homepage');
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            $this->get('translator')->trans('security.register.notice.confirmed')
+        );
+
+        return $this->redirectToRoute('login_route');
+    }
+
+    /**
      * Send the confirmation email for the given registration
      *
      * @param Registration $registration
@@ -107,5 +145,25 @@ class SecurityController extends Controller
             ->setBody($content)
         ;
         $this->get('mailer')->send($message);
+    }
+
+    /**
+     * Retrieve the security command bus service
+     *
+     * @return \App\Component\Command\BusInterface
+     */
+    private function getCommandBus()
+    {
+        return $this->get('app_main.security.command_bus');
+    }
+
+    /**
+     * Retrieve the security user reader service
+     *
+     * @return \App\Component\Security\User\ReaderInterface
+     */
+    private function getReader()
+    {
+        return $this->get('app_main.security.user.reader');
     }
 }

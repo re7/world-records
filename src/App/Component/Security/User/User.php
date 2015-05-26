@@ -10,7 +10,7 @@ class User
     /**
      * The unique identifier
      *
-     * @var int|null
+     * @var string
      */
     private $identifier;
 
@@ -34,24 +34,21 @@ class User
      * @param string $username
      * @param string $password
      */
-    public function __construct($username, $password)
+    public function __construct($identifier, $username, $password)
     {
-        $this->username = $username;
-        $this->password = $password;
+        $this->identifier = $identifier;
+        $this->username   = $username;
+        $this->password   = $password;
     }
 
     /**
      * Set identifier
      *
-     * @param int|null $identifier
-     *
-     * @return self
+     * @return string
      */
-    public function setIdentifier($identifier = null)
+    public function getIdentifier()
     {
-        $this->identifier = $identifier;
-
-        return $this;
+        return $this->identifier;
     }
 
     /**

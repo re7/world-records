@@ -15,4 +15,13 @@ interface ReaderInterface
      * @return User|null
      */
     public function findByUsername($username);
+
+    /**
+     * Retrieve the user having the given identifier
+     *
+     * @param string $identifier
+     *
+     * @return User|null
+     */
+    public function findByIdentifier($identifier);
 }

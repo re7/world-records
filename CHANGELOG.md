@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 - Account registration with a confirmation email
 - Command to promote a user as moderator
 - Bootstrap theme
+- Login/disconnect link in the navigation bar
 
 ### Changed
 

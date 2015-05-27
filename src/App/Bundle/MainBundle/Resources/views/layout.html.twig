@@ -30,6 +30,13 @@
                     <li><a href="{{ path('app_main_submission_submit') }}">Soumettre un record</a></li>
                     <li><a href="{{ path('app_main_submission_list') }}">En attente</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li><a href="{{ path('login_route') }}">Se connecter</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
     </nav>

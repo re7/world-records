@@ -40,14 +40,6 @@ class SecurityController extends Controller
     }
 
     /**
-     * Empty action, used to validate the route. The security system will handle
-     * the request
-     */
-    public function loginCheckAction()
-    {
-    }
-
-    /**
      * Send a confirmation email to create a new user account
      *
      * @param Request $request

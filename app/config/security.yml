@@ -23,6 +23,8 @@ security:
                 login_path: /login
                 check_path: /login_check
                 csrf_provider: security.csrf.token_manager
-
+            logout:
+                path: /logout
+                target: /
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

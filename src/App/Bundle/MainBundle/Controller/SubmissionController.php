@@ -74,6 +74,8 @@ class SubmissionController extends Controller
      *
      * @param Request $request
      *
+     * @Security("is_granted('ROLE_MODERATOR')")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function validateAction(Request $request)

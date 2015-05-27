@@ -40,7 +40,7 @@ class UserProvider implements UserProviderInterface
         if ($user !== null) {
             $password = $user->getPassword();
             $salt     = null;
-            $roles    = ['ROLE_USER'];
+            $roles    = [$user->isModerator() ? 'ROLE_MODERATOR' : 'ROLE_USER'];
 
             return new User($username, $password, $salt, $roles);
         }

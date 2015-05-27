@@ -18,7 +18,9 @@
             </p>
             <div>
                 Soumis le {{ submission.createdAt|date('d/m/Y') }}
-                - <a href="{{ path('app_main_submission_validate', {identifier: submission.identifier}) }}">valider la soumission</a>
+                {% if is_granted('ROLE_MODERATOR') %}
+                    - <a href="{{ path('app_main_submission_validate', {identifier: submission.identifier}) }}">valider la soumission</a>
+                {% endif %}
             </div>
         </div>
     {% else %}

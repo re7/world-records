@@ -8,8 +8,9 @@ security:
             id: app_main.security.user.user_provider
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_MODERATOR:   ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_MODERATOR]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_MODERATOR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     firewalls:
         dev:

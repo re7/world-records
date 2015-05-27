@@ -55,7 +55,7 @@ class User
      *
      * @var bool
      *
-     * @ORM\Column(name="moderator", type="boolean")
+     * @ORM\Column(name="moderator", type="boolean", options={"default" = "0"})
      */
     private $moderator;
 

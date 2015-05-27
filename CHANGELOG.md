@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 - Command to promote a user as moderator
 - Bootstrap theme
 - Login/disconnect link in the navigation bar
+- Submission refusal for moderators
 
 ### Changed
 

@@ -19,7 +19,8 @@
             <div>
                 Soumis le {{ submission.createdAt|date('d/m/Y') }}
                 {% if is_granted('ROLE_MODERATOR') %}
-                    - <a href="{{ path('app_main_submission_validate', {identifier: submission.identifier}) }}">valider la soumission</a>
+                    <a class="btn btn-success" href="{{ path('app_main_submission_validate', {identifier: submission.identifier}) }}">valider</a>
+                    <a class="btn btn-danger" href="{{ path('app_main_submission_refuse', {identifier: submission.identifier}) }}">refuser</a>
                 {% endif %}
             </div>
         </div>

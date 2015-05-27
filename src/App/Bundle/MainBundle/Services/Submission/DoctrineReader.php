@@ -54,6 +54,18 @@ class DoctrineReader implements ReaderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findByIdentifier($identifier)
+    {
+        $entity = $this->getRepository()->findByIdentifier($identifier);
+
+        $submission = $this->converter->from($entity);
+
+        return $submission;
+    }
+
+    /**
      * Retrieve the submission entity repository
      *
      * @return \App\Bundle\MainBundle\Entity\SubmissionRepository

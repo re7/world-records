@@ -33,9 +33,26 @@ class SubmissionRepository extends EntityRepository
         $builder = $this->createQueryBuilder('submission');
         $builder
             ->where('submission.validated = FALSE')
+            ->andWhere('submission.refused = FALSE')
             ->orderBy('submission.createdAt', 'DESC')
         ;
 
         return $builder->getQuery()->getResult();
+    }
+
+    /**
+     * Find the submission having the given identifier
+     *
+     * @return Submission|null
+     */
+    public function findByIdentifier($identifier)
+    {
+        $builder = $this->createQueryBuilder('submission');
+        $builder
+            ->where('submission.id = :identifier')
+            ->setParameter('identifier', $identifier)
+        ;
+
+        return $builder->getQuery()->getOneOrNullResult();
     }
 }

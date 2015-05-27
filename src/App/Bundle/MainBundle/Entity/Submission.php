@@ -123,6 +123,15 @@ class Submission
     private $validated = false;
 
     /**
+     * Whether the submission has been refused
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="refused", type="boolean", nullable=false)
+     */
+    private $refused = false;
+
+    /**
      * Get id
      *
      * @return int
@@ -396,4 +405,27 @@ class Submission
         return $this;
     }
 
+    /**
+     * Get refused
+     *
+     * @return bool
+     */
+    public function isRefused()
+    {
+        return $this->refused;
+    }
+
+    /**
+     * Set refused
+     *
+     * @param bool $refused
+     *
+     * @return self
+     */
+    public function setRefused($refused)
+    {
+        $this->refused = $refused;
+
+        return $this;
+    }
 }

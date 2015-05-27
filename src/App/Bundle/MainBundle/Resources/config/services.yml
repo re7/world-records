@@ -1,38 +1,14 @@
 services:
     app_main.clock:
         class: App\Component\Clock\Clock
-    app_main.submission.factory:
-        class: App\Bundle\MainBundle\Services\Submission\SubmissionFactory
-        arguments: [@app_main.clock]
-    app_main.submission.writer:
-        class: App\Bundle\MainBundle\Services\Submission\DoctrineWriter
-        arguments: [@doctrine.orm.entity_manager, @app_main.submission.entity_converter, @event_dispatcher]
-    app_main.submission.reader:
-        class: App\Bundle\MainBundle\Services\Submission\DoctrineReader
-        arguments: [@doctrine.orm.entity_manager, @app_main.submission.entity_converter]
-    app_main.submission.entity_converter:
-        class: App\Bundle\MainBundle\Services\Submission\EntityConverter
-    app_main.record.writer:
-        class: App\Bundle\MainBundle\Services\Record\DoctrineWriter
-        arguments: [@doctrine.orm.entity_manager, @app_main.record.entity_converter]
-    app_main.record.reader:
-        class: App\Bundle\MainBundle\Services\Record\DoctrineReader
-        arguments: [@doctrine.orm.entity_manager, @app_main.record.entity_converter]
     app_main.record.entity_converter:
         class: App\Bundle\MainBundle\Services\Record\EntityConverter
     app_main.record.lister.date:
         class: App\Bundle\MainBundle\Services\Record\Lister\DateLister
         arguments: [@doctrine.orm.entity_manager]
-    app_main.event.subscriber.submission:
-        class: App\Bundle\MainBundle\Events\Submission\SubmissionSubscriber
-        arguments: [@app_main.record.writer, @app_main.clock]
-        tags:
-            - { name: kernel.event_subscriber }
-    app_main.submission.autocompleter:
-        class: App\Bundle\MainBundle\Services\Autocompleter\BusAutocompleter
-        arguments: [@app_main.clock]
-    app_main.submission.autocompleter.handler.speedruncom:
-        class: App\Bundle\MainBundle\Services\Autocompleter\Handler\SpeedruncomHandler
-        arguments: [@guzzle.client]
-        tags:
-            - { name: app_main.submission.autocompleter }
+    app_main.record.reader:
+        class: App\Bundle\MainBundle\Services\Record\DoctrineReader
+        arguments: [@doctrine.orm.entity_manager, @app_main.record.entity_converter]
+    app_main.record.writer:
+        class: App\Bundle\MainBundle\Services\Record\DoctrineWriter
+        arguments: [@doctrine.orm.entity_manager, @app_main.record.entity_converter]

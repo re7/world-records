@@ -13,4 +13,13 @@ interface ReaderInterface
      * @return Submission[]
      */
     public function findAllNotValidated();
+
+    /**
+     * Retrieve the submission having the given identifier
+     *
+     * @param int $identifier
+     *
+     * @return Submission|null
+     */
+    public function findByIdentifier($identifier);
 }

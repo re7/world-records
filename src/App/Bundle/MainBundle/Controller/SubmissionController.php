@@ -3,9 +3,10 @@
 namespace App\Bundle\MainBundle\Controller;
 
 use App\Bundle\MainBundle\Form\Model\Link;
-use App\Bundle\MainBundle\Form\Type\LinkType;
 use App\Bundle\MainBundle\Form\Model\Submission as FormSubmission;
+use App\Bundle\MainBundle\Form\Type\LinkType;
 use App\Bundle\MainBundle\Form\Type\SubmissionType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,8 @@ class SubmissionController extends Controller
      * Submit a new world record
      *
      * @param Request $request
+     *
+     * @Security("is_granted('ROLE_USER')")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

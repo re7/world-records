@@ -13,15 +13,22 @@
     <p>
         Ou vous pouvez voir la liste des records en attente de validation <a href="{{ path('app_main_submission_list') }}">ici</a>.
     </p>
-    <div>
+    <div class="list">
         {% for record in records %}
-            <p>
-                {{ macros.runner(record.run.player) }}
-                sur <a href="{{ record.run.links[0] }}">{{ record.run.game }} - {{ record.run.category }}</a>,
-                sur {{ record.run.platform }},
-                en {{ record.run.time }}{% if record.run.links|length == 0 %}(pas de vidéo){% endif %}
-                - {{ record.run.date|date('d/m/Y') }}
-            </p>
+            <div class="element">
+                <div>
+                    {% if record.run.links|length > 0 %}
+                        <span class="title"><a href="{{ record.run.links[0] }}">{{ record.run.time }} {{ record.run.game }} - {{ record.run.category }}</a></span>
+                    {% else %}
+                        <span class="title">{{ record.run.time }} {{ record.run.game }} - {{ record.run.category }}</span> <span class="info">(pas de vidéo)</span>
+                    {% endif %}
+                </div>
+                <div class="description">
+                    par {{ macros.runner(record.run.player) }},
+                    sur {{ record.run.platform }}
+                    - {{ record.run.date|date('d/m/Y') }}
+                </div>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}

@@ -40,7 +40,7 @@
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div id="content" class="container">
         {% block flashMessage %}
             {% for flashMessage in app.session.flashbag.get('notice') %}
                 <div class="alert alert-info">

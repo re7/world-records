@@ -1,3 +1,34 @@
 body {
     padding-bottom: 30px;
 }
+
+#content .list {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+#content .list .element {
+    padding: 0 7px;
+    background-color: #EEE;
+}
+
+#content .list .element .title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+#content .list .element .info {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+}
+#content .list .element .title a {
+    color: rgba(0, 0, 0, 0.87);
+}
+#content .list .element .title a:hover {
+    text-decoration: none;
+}
+
+#content .list .element .description {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.54);
+}

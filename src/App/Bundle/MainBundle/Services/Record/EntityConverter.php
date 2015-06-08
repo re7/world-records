@@ -32,7 +32,8 @@ class EntityConverter
             $entity->getLinks(),
             $entity->getPlatform(),
             $entity->getTime(),
-            $entity->getDate()
+            $entity->getDate(),
+            $entity->getThumbnail()
         );
         $record = new Record(
             $run,
@@ -63,6 +64,7 @@ class EntityConverter
             ->setPlatform($run->getPlatform())
             ->setTime($run->getTime())
             ->setDate($run->getDate())
+            ->setThumbnail($run->getThumbnail())
             ->setCreatedAt($record->getCreatedAt())
         ;
     }

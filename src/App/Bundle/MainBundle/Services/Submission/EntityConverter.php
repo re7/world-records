@@ -32,7 +32,8 @@ class EntityConverter
             $entity->getLinks(),
             $entity->getPlatform(),
             $entity->getTime(),
-            $entity->getDate()
+            $entity->getDate(),
+            $entity->getThumbnail()
         );
         $submission = new Submission(
             $run,
@@ -64,6 +65,7 @@ class EntityConverter
             ->setPlatform($run->getPlatform())
             ->setTime($run->getTime())
             ->setDate($run->getDate())
+            ->setThumbnail($run->getThumbnail())
             ->setCreatedAt($submission->getCreatedAt())
             ->setUpdatedAt($submission->getUpdatedAt())
         ;

@@ -96,6 +96,15 @@ class Record
     private $date;
 
     /**
+     * The thumbnail URL for the associated link
+     *
+     * @var string|null
+     *
+     * @ORM\Column(name="thumbnail", type="string", length=255, nullable=true)
+     */
+    private $thumbnail;
+
+    /**
      * The date at which the submission has been posted
      *
      * @var \DateTime
@@ -302,6 +311,30 @@ class Record
     public function setDate(\DateTime $date)
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return string|null
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param string|null $thumbnail
+     *
+     * @return self
+     */
+    public function setThumbnail($thumbnail = null)
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

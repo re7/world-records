@@ -57,25 +57,34 @@ class Run
     private $date;
 
     /**
+     * The URL of the thumbnail of this run
+     *
+     * @var string|null
+     */
+    private $thumbnail;
+
+    /**
      * __construct
      *
-     * @param Player    $player
-     * @param string    $game
-     * @param string    $category
-     * @param string[]  $links
-     * @param string    $platform
-     * @param string    $time
-     * @param \DateTime $date
+     * @param Player      $player
+     * @param string      $game
+     * @param string      $category
+     * @param string[]    $links
+     * @param string      $platform
+     * @param string      $time
+     * @param \DateTime   $date
+     * @param string|null $thumbnail
      */
-    public function __construct(Player $player, $game, $category, array $links, $platform, $time, $date)
+    public function __construct(Player $player, $game, $category, array $links, $platform, $time, $date, $thumbnail = null)
     {
-        $this->player   = $player;
-        $this->game     = $game;
-        $this->category = $category;
-        $this->links    = $links;
-        $this->platform = $platform;
-        $this->time     = $time;
-        $this->date     = $date;
+        $this->player    = $player;
+        $this->game      = $game;
+        $this->category  = $category;
+        $this->links     = $links;
+        $this->platform  = $platform;
+        $this->time      = $time;
+        $this->date      = $date;
+        $this->thumbnail = $thumbnail;
     }
 
     /**
@@ -246,4 +255,27 @@ class Run
         return $this;
     }
 
+    /**
+     * Get thumbnail
+     *
+     * @return string|null
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param string|null $thumbnail
+     *
+     * @return self
+     */
+    public function setThumbnail($thumbnail = null)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
 }

@@ -4,6 +4,8 @@ services:
         arguments: [@app_main.record.writer, @app_main.clock]
         tags:
             - { name: kernel.event_subscriber }
+    app_main.run.thumbnailer:
+        class: App\Bundle\MainBundle\Services\Run\Thumbnailer\YoutubeThumbnailer
     app_main.submission.autocompleter:
         class: App\Bundle\MainBundle\Services\Autocompleter\BusAutocompleter
         arguments: [@app_main.clock]
@@ -22,7 +24,7 @@ services:
         class: App\Bundle\MainBundle\Services\Submission\EntityConverter
     app_main.submission.factory:
         class: App\Bundle\MainBundle\Services\Submission\SubmissionFactory
-        arguments: [@app_main.clock]
+        arguments: [@app_main.clock, @app_main.run.thumbnailer]
     app_main.submission.reader:
         class: App\Bundle\MainBundle\Services\Submission\DoctrineReader
         arguments: [@doctrine.orm.entity_manager, @app_main.submission.entity_converter]

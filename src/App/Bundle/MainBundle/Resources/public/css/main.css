@@ -2,33 +2,46 @@ body {
     padding-bottom: 30px;
 }
 
-#content .list {
+.clear {
+    clear: both;
+}
+
+.list {
     color: rgba(0, 0, 0, 0.87);
 }
 
-#content .list .element {
-    padding: 0 7px;
+.list .element {
+    padding: 4px 8px;
     background-color: #EEE;
 }
 
-#content .list .element .title {
+.list .element .video-thumbnail {
+    float: left;
+    margin-right: 4px;
+    width: 80px;
+    height: 60px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.list .element .title {
     margin: 0 0 10px 0;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.87);
 }
 
-#content .list .element .info {
+.list .element .info {
     color: rgba(0, 0, 0, 0.54);
     font-size: 12px;
 }
-#content .list .element .title a {
+.list .element .title a {
     color: rgba(0, 0, 0, 0.87);
 }
-#content .list .element .title a:hover {
+.list .element .title a:hover {
     text-decoration: none;
 }
 
-#content .list .element .description {
+.list .element .description {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.54);
 }

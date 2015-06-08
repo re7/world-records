@@ -3,6 +3,9 @@
 {% macro runner(player) %}
     {% if player.link %}<a href="{{ player.link }}">{{ player.name }}</a>{% else %}{{ player.name }}{% endif %}
 {% endmacro %}
+{% macro runTitle(run) %}
+    [{{ run.time }}] {{ run.game }} - {{ run.category }}
+{% endmacro %}
 
 {% import _self as macros %}
 
@@ -16,9 +19,14 @@
     <div class="list">
         {% for record in records %}
             <div class="element">
+                {% if record.run.thumbnail %}
+                    <div class="video-thumbnail">
+                        <a href="{{ record.run.links[0] }}"><img src="{{ record.run.thumbnail }}" width="80" height="60" alt="{{ macros.runTitle(record.run) }}" /></a>
+                    </div>
+                {% endif %}
                 <div>
                     {% if record.run.links|length > 0 %}
-                        <span class="title"><a href="{{ record.run.links[0] }}">{{ record.run.time }} {{ record.run.game }} - {{ record.run.category }}</a></span>
+                        <span class="title"><a href="{{ record.run.links[0] }}">{{ macros.runTitle(record.run) }}</a></span>
                     {% else %}
                         <span class="title">{{ record.run.time }} {{ record.run.game }} - {{ record.run.category }}</span> <span class="info">(pas de vidéo)</span>
                     {% endif %}
@@ -28,6 +36,7 @@
                     sur {{ record.run.platform }}
                     - {{ record.run.date|date('d/m/Y') }}
                 </div>
+                <div class="clear"></div>
             </div>
         {% endfor %}
     </div>

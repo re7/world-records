@@ -21,3 +21,6 @@ parameters:
 
     # Secret key used to generate hash for registration
     hash_secret:       ThisTokenIsNotSoSecretChangeIt
+
+    # Key for the Youtube API
+    youtube_api_key:   NotAValidKey

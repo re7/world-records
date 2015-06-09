@@ -6,6 +6,16 @@ body {
     clear: both;
 }
 
+.list-head {
+    text-align: right;
+    padding: 4px 8px;
+    background-color: #E1E1E1;
+}
+
+.list-head .element.selected {
+    font-weight: bold;
+}
+
 .list {
     color: rgba(0, 0, 0, 0.87);
 }

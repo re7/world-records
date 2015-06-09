@@ -10,12 +10,10 @@
 {% import _self as macros %}
 
 {% block content %}
-    <p>
-        Vous pouvez soumettre un record du monde en suivant <a href="{{ path('app_main_submission_submit') }}">ce lien</a>.
-    </p>
-    <p>
-        Ou vous pouvez voir la liste des records en attente de validation <a href="{{ path('app_main_submission_list') }}">ici</a>.
-    </p>
+    <div class="list-head">
+        <span>Trier par : </span>
+        <span class="element selected">Date d'ajout</span>
+    </div>
     <div class="list">
         {% for record in records %}
             <div class="element">

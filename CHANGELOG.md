@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - Bootstrap theme
 - Login/disconnect link in the navigation bar
 - Submission refusal for moderators
+- Thumbnail for runs having a Youtube video
 
 ### Changed
 

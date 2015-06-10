@@ -132,9 +132,10 @@ class SecurityController extends Controller
 
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
-            ->setFrom('wr@re-7.com')
+            ->setFrom('re7.speedrun@gmail.com')
             ->setTo($registration->email)
             ->setBody($content)
+            ->setContentType('text/html')
         ;
         $this->get('mailer')->send($message);
     }

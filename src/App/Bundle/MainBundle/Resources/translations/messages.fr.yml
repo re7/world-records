@@ -19,3 +19,12 @@ submission:
         refused: Ce record a bien été refusé.
         refuse_failed: Une erreur est survenue et a empéché le refus de ce record.
         validated: Ce record a bien été accepté. Il apparaît maintenant sur la page d'accueil.
+security:
+    registration:
+        confirmation_email:
+            title: "[wr.re-7.com] Confirmation d'inscription"
+    register:
+        notice:
+            confirm: L'email de confirmation a bien été envoyé. Vérifiez votre boîte email pour activer votre compte.
+            failed: Le lien de confirmation semble invalide. Vous pouvez réessayer de vous inscrire ou contacter l'équipe pour signaler le problème.
+            confirmed: Votre compte a bien été activé. Vous pouvez maintenant vous connecter.

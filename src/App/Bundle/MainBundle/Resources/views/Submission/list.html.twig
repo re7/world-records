@@ -13,8 +13,8 @@
                 {{ macros.runner(submission.run.player) }}
                 sur <a href="{{ submission.run.links[0] }}">{{ submission.run.game }} - {{ submission.run.category }}</a>,
                 sur {{ submission.run.platform }},
-                en {{ submission.run.time }}{% if submission.run.links|length == 0 %}(pas de vidéo){% endif %}
-                - {{ submission.run.date|date('d/m/Y') }}
+                en {{ submission.run.time }}{% if submission.run.links|length == 0 %}(pas de vidéo){% endif %},
+                le {{ submission.run.date|date('d/m/Y') }}
             </p>
             <div>
                 Soumis le {{ submission.createdAt|date('d/m/Y') }}

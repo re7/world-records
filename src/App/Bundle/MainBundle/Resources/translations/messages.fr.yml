@@ -11,3 +11,11 @@ form:
             platform: Plateforme
             time: Temps
             date: Date
+submission:
+    list:
+        none: Aucun record en attente de validation pour le moment.
+    notice:
+        submitted: Votre record a bien été soumis et est maintenant en attente de validation par un modérateur.
+        refused: Ce record a bien été refusé.
+        refuse_failed: Une erreur est survenue et a empéché le refus de ce record.
+        validated: Ce record a bien été accepté. Il apparaît maintenant sur la page d'accueil.

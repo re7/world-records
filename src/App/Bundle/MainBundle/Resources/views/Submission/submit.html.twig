@@ -16,15 +16,15 @@
             <h3>Détails</h3>
             {{ form_start(form) }}
                 {{ form_rest(form) }}
-                <input type="submit" value="{{ 'form.submit'|trans }}" />
-                <a href="{{ path('app_main_homepage') }}">{{ 'form.cancel'|trans }}</a>
+                <button type="submit" class="btn btn-default">{{ 'form.submit'|trans }}</button>
+                ou <a href="{{ path('app_main_homepage') }}">{{ 'form.cancel'|trans }}</a>
             {{ form_end(form) }}
         </div>
         <div class="col-md-4">
             <h3>Auto-remplissage</h3>
             {{ form_start(linkForm, {action: path('app_main_submission_autocomplete'), attr: {'data-ajax-form': true}}) }}
                 {{ form_rest(linkForm) }}
-                <input type="submit" value="{{ 'form.submit'|trans }}" />
+                <button type="submit" class="btn btn-default">{{ 'form.submit'|trans }}</button>
             {{ form_end(linkForm) }}
         </div>
     </div>

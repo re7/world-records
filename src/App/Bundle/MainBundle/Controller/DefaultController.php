@@ -20,6 +20,22 @@ class DefaultController extends Controller
     }
 
     /**
+     * The action to render the piwik tracking code
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function piwikAction()
+    {
+        $siteId     = $this->container->hasParameter('piwik.site_id') ? $this->container->getParameter('piwik.site_id') : null;
+        $trackerUrl = $this->container->hasParameter('piwik.tracker_url') ? $this->container->getParameter('piwik.tracker_url') : null;
+
+        return $this->render('AppMainBundle:Default:piwik.html.twig', [
+            'siteId'     => $siteId,
+            'trackerUrl' => $trackerUrl,
+        ]);
+    }
+
+    /**
      * Retrieve record identifiers from the given elements array
      *
      * @param \App\Component\Lister\Element[] $elements

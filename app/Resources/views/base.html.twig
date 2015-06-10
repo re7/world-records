@@ -15,5 +15,6 @@
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        {{ render(controller('AppMainBundle:Default:piwik')) }}
     </body>
 </html>

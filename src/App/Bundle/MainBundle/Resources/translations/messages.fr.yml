@@ -11,6 +11,11 @@ form:
             platform: Plateforme
             time: Temps
             date: Date
+    security:
+        registration:
+            label:
+                email: Email
+                password: Mot de passe
 submission:
     list:
         none: Aucun record en attente de validation pour le moment.
@@ -24,6 +29,7 @@ security:
         confirmation_email:
             title: "[wr.re-7.com] Confirmation d'inscription"
     register:
+        security_note: Votre mot de passe sera hashé avec la méthode bcrypt. Ce qui signifie que même en regardant dans la base de donnée, il ne pourra pas être retrouvé.
         notice:
             confirm: L'email de confirmation a bien été envoyé. Vérifiez votre boîte email pour activer votre compte.
             failed: Le lien de confirmation semble invalide. Vous pouvez réessayer de vous inscrire ou contacter l'équipe pour signaler le problème.

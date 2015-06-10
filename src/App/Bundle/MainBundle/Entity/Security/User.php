@@ -57,7 +57,7 @@ class User
      *
      * @ORM\Column(name="moderator", type="boolean", options={"default" = "0"})
      */
-    private $moderator;
+    private $moderator = false;
 
     /**
      * Get uuid

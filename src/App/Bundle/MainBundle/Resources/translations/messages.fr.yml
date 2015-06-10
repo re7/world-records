@@ -19,6 +19,9 @@ form:
 submission:
     list:
         none: Aucun record en attente de validation pour le moment.
+    submit:
+        autocompletion:
+            help: Vous pouvez entrer un lien Speedrun.com pour directement pré-remplir les données d'un nouveau record. Pensez à bien vérifier la validité des données avant de le soumettre.
     notice:
         submitted: Votre record a bien été soumis et est maintenant en attente de validation par un modérateur.
         refused: Ce record a bien été refusé.

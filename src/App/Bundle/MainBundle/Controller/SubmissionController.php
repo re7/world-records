@@ -111,7 +111,7 @@ class SubmissionController extends Controller
         $bus->launch($command);
 
         $reader = $this->getReader();
-        if (!$reader->findByIdentifier($identifier)) {
+        if ($reader->isRefused($identifier)) {
             $this->get('session')->getFlashBag()->add(
                 'notice',
                 $this->get('translator')->trans('submission.notice.refused')

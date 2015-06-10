@@ -66,6 +66,20 @@ class DoctrineReader implements ReaderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function isRefused($identifier)
+    {
+        $entity = $this->getRepository()->findByIdentifier($identifier);
+
+        if ($entity !== null) {
+            return $entity->isRefused();
+        }
+
+        return false;
+    }
+
+    /**
      * Retrieve the submission entity repository
      *
      * @return \App\Bundle\MainBundle\Entity\SubmissionRepository

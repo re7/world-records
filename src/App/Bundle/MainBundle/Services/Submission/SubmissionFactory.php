@@ -6,6 +6,7 @@ use App\Bundle\MainBundle\Form\Model\Submission as FormSubmission;
 use App\Component\Clock\Clock;
 use App\Component\Run\Player;
 use App\Component\Run\Run;
+use App\Component\Run\Thumbnailer\ThumbnailerInterface;
 use App\Component\Submission\Submission;
 
 /**
@@ -23,11 +24,13 @@ class SubmissionFactory
     /**
      * __construct
      *
-     * @param Clock $clock
+     * @param Clock                $clock
+     * @param ThumbnailerInterface $thumbnailer
      */
-    public function __construct(Clock $clock)
+    public function __construct(Clock $clock, ThumbnailerInterface $thumbnailer)
     {
-        $this->clock = $clock;
+        $this->clock       = $clock;
+        $this->thumbnailer = $thumbnailer;
     }
 
     /**
@@ -39,7 +42,8 @@ class SubmissionFactory
      */
     public function create(FormSubmission $formSubmission)
     {
-        $now = $this->clock->now();
+        $now       = $this->clock->now();
+        $thumbnail = $this->thumbnailer->find($formSubmission->getLink());
 
         $player     = new Player(
             $formSubmission->getPlayerName(),
@@ -52,7 +56,8 @@ class SubmissionFactory
             [$formSubmission->getLink()],
             $formSubmission->getPlatform(),
             $formSubmission->getTime(),
-            $formSubmission->getDate()
+            $formSubmission->getDate(),
+            $thumbnail
         );
         $submission = new Submission(
             $run,

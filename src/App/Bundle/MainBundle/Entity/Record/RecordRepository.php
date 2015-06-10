@@ -24,17 +24,49 @@ class RecordRepository extends EntityRepository
     }
 
     /**
-     * Retrieve all world records
+     * Retrieve world records having the given identifiers
+     *
+     * @param int[] $identifiers
      *
      * @return Record[]
      */
-    public function findAll()
+    public function findCollection(array $identifiers)
     {
         $builder = $this->createQueryBuilder('record');
         $builder
-            ->orderBy('record.createdAt', 'DESC')
+            ->where('record.identifier IN (:identifiers)')
+            ->setParameter('identifiers', $identifiers)
         ;
 
         return $builder->getQuery()->getResult();
+    }
+
+    /**
+     * Retrieve world records identifiers ordered by creation date DESC, for the
+     * given limit and offset
+     *
+     * @param int $limit
+     * @param int $offset
+     *
+     * @return int[]
+     */
+    public function paginateByDate($limit, $offset = 0)
+    {
+        $builder = $this->createQueryBuilder('record');
+        $builder
+            ->select('record.identifier')
+            ->orderBy('record.createdAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        $arrayResult = $builder->getQuery()->getScalarResult();
+
+        $result = [];
+        foreach ($arrayResult as $array) {
+            $result[] = $array['identifier'];
+        }
+
+        return $result;
     }
 }

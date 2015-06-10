@@ -1,0 +1,57 @@
+body {
+    padding-bottom: 30px;
+}
+
+.clear {
+    clear: both;
+}
+
+.list-head {
+    text-align: right;
+    padding: 4px 8px;
+    background-color: #E1E1E1;
+}
+
+.list-head .element.selected {
+    font-weight: bold;
+}
+
+.list {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.list .element {
+    padding: 4px 8px;
+    background-color: #EEE;
+}
+
+.list .element .video-thumbnail {
+    float: left;
+    margin-right: 4px;
+    width: 80px;
+    height: 60px;
+    overflow: hidden;
+    background-color: white;
+}
+
+.list .element .title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.list .element .info {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+}
+.list .element .title a {
+    color: rgba(0, 0, 0, 0.87);
+}
+.list .element .title a:hover {
+    text-decoration: none;
+}
+
+.list .element .description {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.54);
+}

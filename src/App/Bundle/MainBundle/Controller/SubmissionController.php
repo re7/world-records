@@ -3,9 +3,11 @@
 namespace App\Bundle\MainBundle\Controller;
 
 use App\Bundle\MainBundle\Form\Model\Link;
-use App\Bundle\MainBundle\Form\Type\LinkType;
 use App\Bundle\MainBundle\Form\Model\Submission as FormSubmission;
+use App\Bundle\MainBundle\Form\Type\LinkType;
 use App\Bundle\MainBundle\Form\Type\SubmissionType;
+use App\Component\Submission\RefuseCommand;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +22,8 @@ class SubmissionController extends Controller
      * Submit a new world record
      *
      * @param Request $request
+     *
+     * @Security("is_granted('ROLE_USER')")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -71,6 +75,8 @@ class SubmissionController extends Controller
      *
      * @param Request $request
      *
+     * @Security("is_granted('ROLE_MODERATOR')")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function validateAction(Request $request)
@@ -82,6 +88,43 @@ class SubmissionController extends Controller
             'notice',
             $this->get('translator')->trans('submission.notice.validated')
         );
+
+        return $this->redirectToRoute('app_main_submission_list');
+    }
+
+
+    /**
+     * Refuse the submission having the given identifier
+     *
+     * @param Request $request
+     *
+     * @Security("is_granted('ROLE_MODERATOR')")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function refuseAction(Request $request)
+    {
+        $identifier = $request->get('identifier');
+
+        $command = new RefuseCommand($identifier);
+        $bus     = $this->getCommandBus();
+        $bus->launch($command);
+
+        $reader = $this->getReader();
+        if ($reader->isRefused($identifier)) {
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('submission.notice.refused')
+            );
+
+            return $this->redirectToRoute('app_main_homepage');
+        }
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            $this->get('translator')->trans('submission.notice.refuse_failed')
+        );
+
 
         return $this->redirectToRoute('app_main_submission_list');
     }
@@ -121,5 +164,25 @@ class SubmissionController extends Controller
         }
 
         throw new BadRequestException();
+    }
+
+    /**
+     * Retrieve the submission command bus service
+     *
+     * @return \App\Component\Command\BusInterface
+     */
+    private function getCommandBus()
+    {
+        return $this->get('app_main.submission.command.bus');
+    }
+
+    /**
+     * Retrieve the submission reader service
+     *
+     * @return \App\Component\Submission\ReaderInterface
+     */
+    private function getReader()
+    {
+        return $this->get('app_main.submission.reader');
     }
 }

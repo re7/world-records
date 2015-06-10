@@ -13,12 +13,15 @@
                 {{ macros.runner(submission.run.player) }}
                 sur <a href="{{ submission.run.links[0] }}">{{ submission.run.game }} - {{ submission.run.category }}</a>,
                 sur {{ submission.run.platform }},
-                en {{ submission.run.time }}{% if submission.run.links|length == 0 %}(pas de vidéo){% endif %}
-                - {{ submission.run.date|date('d/m/Y') }}
+                en {{ submission.run.time }}{% if submission.run.links|length == 0 %}(pas de vidéo){% endif %},
+                le {{ submission.run.date|date('d/m/Y') }}
             </p>
             <div>
                 Soumis le {{ submission.createdAt|date('d/m/Y') }}
-                - <a href="{{ path('app_main_submission_validate', {identifier: submission.identifier}) }}">valider la soumission</a>
+                {% if is_granted('ROLE_MODERATOR') %}
+                    <a class="btn btn-success" href="{{ path('app_main_submission_validate', {identifier: submission.identifier}) }}">valider</a>
+                    <a class="btn btn-danger" href="{{ path('app_main_submission_refuse', {identifier: submission.identifier}) }}">refuser</a>
+                {% endif %}
             </div>
         </div>
     {% else %}

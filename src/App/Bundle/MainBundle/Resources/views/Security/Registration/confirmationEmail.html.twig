@@ -1,0 +1,4 @@
+<p>Il semblerait que vous ayiez fait une demande d'inscription sur le site <a href="{{ url('app_main_homepage') }}">{{ url('app_main_homepage') }}</a>.</p>
+<p>Si c'est bien vous, vous pouvez cliquer sur le lien ci-dessous pour valider votre compte. Vous pourrez vous connecter avec l'adresse email à laquelle vous recevez ce message, et le mot de passe choisi lors de votre inscription.</p>
+<p><a href="{{ url('app_main_security_confirm', {email: email, password: password, token: securityToken}) }}">Cliquez sur ce lien pour confirmer votre inscription</a></p>
+<p>L'équipe RE-7</p>

@@ -39,13 +39,14 @@ class DoctrineReader implements ReaderInterface
     /**
      * {@inheritdoc}
      */
-    public function findAll()
+    public function find(array $identifiers)
     {
         $records  = [];
-        $entities = $this->getRepository()->findAll();
+        $entities = $this->getRepository()->findCollection($identifiers);
 
         foreach ($entities as $entity) {
-            $records[] = $this->converter->from($entity);
+            $record = $this->converter->from($entity);
+            $records[$record->getIdentifier()] = $record;
         }
 
         return $records;

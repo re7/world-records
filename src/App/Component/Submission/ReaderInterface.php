@@ -13,4 +13,23 @@ interface ReaderInterface
      * @return Submission[]
      */
     public function findAllNotValidated();
+
+    /**
+     * Retrieve the submission having the given identifier
+     *
+     * @param int $identifier
+     *
+     * @return Submission|null
+     */
+    public function findByIdentifier($identifier);
+
+    /**
+     * Check if the submission having the given identifier is refused. Return
+     * true if the submission does not exist
+     *
+     * @param int $identifier
+     *
+     * @return bool
+     */
+    public function isRefused($identifier);
 }

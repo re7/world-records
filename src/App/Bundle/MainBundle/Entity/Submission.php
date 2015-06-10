@@ -96,6 +96,15 @@ class Submission
     private $date;
 
     /**
+     * The thumbnail URL for the associated link
+     *
+     * @var string|null
+     *
+     * @ORM\Column(name="thumbnail", type="string", length=255, nullable=true)
+     */
+    private $thumbnail;
+
+    /**
      * The date at which the submission has been posted
      *
      * @var \DateTime
@@ -121,6 +130,15 @@ class Submission
      * @ORM\Column(name="validated", type="boolean", nullable=false)
      */
     private $validated = false;
+
+    /**
+     * Whether the submission has been refused
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="refused", type="boolean", nullable=false)
+     */
+    private $refused = false;
 
     /**
      * Get id
@@ -325,6 +343,30 @@ class Submission
     }
 
     /**
+     * Get thumbnail
+     *
+     * @return string|null
+     */
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    /**
+     * Set thumbnail
+     *
+     * @param string|null $thumbnail
+     *
+     * @return self
+     */
+    public function setThumbnail($thumbnail = null)
+    {
+        $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -396,4 +438,27 @@ class Submission
         return $this;
     }
 
+    /**
+     * Get refused
+     *
+     * @return bool
+     */
+    public function isRefused()
+    {
+        return $this->refused;
+    }
+
+    /**
+     * Set refused
+     *
+     * @param bool $refused
+     *
+     * @return self
+     */
+    public function setRefused($refused)
+    {
+        $this->refused = $refused;
+
+        return $this;
+    }
 }

@@ -1,0 +1,39 @@
+form:
+    submit: Valider
+    cancel: Annuler
+    submission:
+        label:
+            playerName: Joueur
+            playerLink: Lien du profil
+            game: Jeu
+            category: Catégorie
+            url: Lien vidéo
+            platform: Plateforme
+            time: Temps
+            date: Date
+    security:
+        registration:
+            label:
+                email: Email
+                password: Mot de passe
+submission:
+    list:
+        none: Aucun record en attente de validation pour le moment.
+    submit:
+        autocompletion:
+            help: Vous pouvez entrer un lien Speedrun.com pour directement pré-remplir les données d'un nouveau record. Pensez à bien vérifier la validité des données avant de le soumettre.
+    notice:
+        submitted: Votre record a bien été soumis et est maintenant en attente de validation par un modérateur.
+        refused: Ce record a bien été refusé.
+        refuse_failed: Une erreur est survenue et a empéché le refus de ce record.
+        validated: Ce record a bien été accepté. Il apparaît maintenant sur la page d'accueil.
+security:
+    registration:
+        confirmation_email:
+            title: "[wr.re-7.com] Confirmation d'inscription"
+    register:
+        security_note: Votre mot de passe sera hashé avec la méthode bcrypt. Ce qui signifie que même en regardant dans la base de donnée, il ne pourra pas être retrouvé.
+        notice:
+            confirm: L'email de confirmation a bien été envoyé. Vérifiez votre boîte email pour activer votre compte.
+            failed: Le lien de confirmation semble invalide. Vous pouvez réessayer de vous inscrire ou contacter l'équipe pour signaler le problème.
+            confirmed: Votre compte a bien été activé. Vous pouvez maintenant vous connecter.

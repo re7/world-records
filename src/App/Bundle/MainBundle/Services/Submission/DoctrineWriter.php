@@ -5,6 +5,7 @@ namespace App\Bundle\MainBundle\Services\Submission;
 use App\Bundle\MainBundle\Entity\Submission as SubmissionEntity;
 use App\Bundle\MainBundle\Events\Submission\SubmissionEvents;
 use App\Bundle\MainBundle\Events\Submission\ValidatedEvent;
+use App\Component\Submission\Exceptions\RefusalFailedException;
 use App\Component\Submission\Exceptions\ValidationFailedException;
 use App\Component\Submission\Submission;
 use App\Component\Submission\WriterInterface;
@@ -83,6 +84,21 @@ class DoctrineWriter implements WriterInterface
 
         $event = new ValidatedEvent($this->converter->from($entity));
         $this->eventDispatcher->dispatch(SubmissionEvents::VALIDATED, $event);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function refuse($identifier)
+    {
+        $entity = $this->getRepository()->find($identifier);
+
+        if ($entity === null || $entity->isRefused()) {
+            throw new RefusalFailedException(sprintf('Cannot refuse the submission "%s".', $identifier));
+        }
+
+        $entity->setRefused(true);
+        $this->getRepository()->save($entity);
     }
 
     /**

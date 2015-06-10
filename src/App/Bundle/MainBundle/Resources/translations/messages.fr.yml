@@ -1,0 +1,13 @@
+form:
+    submit: Valider
+    cancel: Annuler
+    submission:
+        label:
+            playerName: Joueur
+            playerLink: Lien du profil
+            game: Jeu
+            category: Catégorie
+            url: Lien vidéo
+            platform: Plateforme
+            time: Temps
+            date: Date

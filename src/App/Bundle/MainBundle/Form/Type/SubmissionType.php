@@ -17,18 +17,32 @@ class SubmissionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('playerName', 'text')
+            ->add('playerName', 'text', [
+                'label' => 'form.submission.label.playerName',
+            ])
             ->add('playerLink', 'url', [
                 'required' => false,
+                'label' => 'form.submission.label.playerLink',
             ])
-            ->add('game', 'text')
-            ->add('category', 'text')
+            ->add('game', 'text', [
+                'label' => 'form.submission.label.game',
+            ])
+            ->add('category', 'text', [
+                'label' => 'form.submission.label.category',
+            ])
             ->add('link', 'url', [
                 'required' => false,
+                'label' => 'form.submission.label.url',
             ])
-            ->add('platform', 'text')
-            ->add('time', 'text')
-            ->add('date', 'date')
+            ->add('platform', 'text', [
+                'label' => 'form.submission.label.platform',
+            ])
+            ->add('time', 'text', [
+                'label' => 'form.submission.label.time',
+            ])
+            ->add('date', 'date', [
+                'label' => 'form.submission.label.date',
+            ])
         ;
     }
 

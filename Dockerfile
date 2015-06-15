@@ -32,7 +32,6 @@ RUN php composer.phar install --optimize-autoloader
 RUN php app/console cache:clear --env=prod --no-debug
 
 RUN php app/console assetic:dump --env=prod --no-debug
-RUN php app/console doctrine:migrations:migrate
 
 # Add the start script
 ADD docker/start.sh /

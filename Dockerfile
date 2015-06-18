@@ -1,5 +1,5 @@
 # A nginx webserver for the world record app
-FROM debian:wheezy
+FROM debian:jessie
 
 MAINTAINER Emeric Kasbarian, emerick42@gmail.com
 

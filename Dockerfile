@@ -7,7 +7,7 @@ MAINTAINER Emeric Kasbarian, emerick42@gmail.com
 RUN apt-get update
 
 # Install project dependencies
-RUN apt-get install -y curl
+RUN apt-get install -y curl git
 
 # Install php and nginx
 RUN apt-get install -y php5-cli php5-fpm php5-curl php5-mysql

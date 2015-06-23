@@ -2,9 +2,10 @@
 
 {% block stylesheets %}
     {% stylesheets
-        '@AppMainBundle/Resources/public/css/bootstrap.min.css'
-        '@AppMainBundle/Resources/public/css/bootstrap-theme.min.css'
-        '@AppMainBundle/Resources/public/css/main.css'
+        'bundles/appmain/css/bootstrap.min.css'
+        'bundles/appmain/css/bootstrap-theme.min.css'
+        'bundles/appmain/css/main.css'
+        filter='cssrewrite'
     %}
         <link href="{{ asset_url }}" rel="stylesheet" />
     {% endstylesheets %}

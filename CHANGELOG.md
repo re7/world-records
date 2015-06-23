@@ -10,6 +10,10 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+## v0.2.1 - 2015-06-23
+### Added
+- Docker configuration file
+
 ## v0.2.0 - 2015-06-10
 ### Added
 - Paginate world records on the homepage and sort them by creation date

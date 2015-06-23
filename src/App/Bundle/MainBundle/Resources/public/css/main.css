@@ -2,6 +2,21 @@ body {
     padding-bottom: 30px;
 }
 
+.navbar-header .navbar-brand {
+    position: relative;
+    padding-left: 51px;
+}
+
+.navbar-header .navbar-brand::before {
+    content: "";
+    position: absolute;
+    background-image: url('../img/logo.png');
+    width: 32px;
+    height: 45px;
+    left: 5px;
+    top: 5px;
+}
+
 .clear {
     clear: both;
 }

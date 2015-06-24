@@ -55,15 +55,19 @@ body {
     color: rgba(0, 0, 0, 0.87);
 }
 
-.list .element .info {
-    color: rgba(0, 0, 0, 0.54);
-    font-size: 12px;
-}
 .list .element .title a {
     color: rgba(0, 0, 0, 0.87);
 }
+.list .element .title a:visited {
+    color: #777;
+}
 .list .element .title a:hover {
     text-decoration: none;
+}
+
+.list .element .info {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
 }
 
 .list .element .description {

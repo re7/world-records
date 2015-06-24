@@ -10,6 +10,15 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+## v0.2.2 - 2015-06-24
+### Added
+- Decrease visibility of world records already browsed
+- Ability to browse older world records pages
+
+### Fixed
+- Speedruncom mis-autocompleting platform
+- `-` character in youtube video identifiers
+
 ## v0.2.1 - 2015-06-23
 ### Added
 - Docker configuration file

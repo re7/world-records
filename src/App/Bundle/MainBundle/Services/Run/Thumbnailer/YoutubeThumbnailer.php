@@ -80,7 +80,7 @@ class YoutubeThumbnailer implements ThumbnailerInterface
      */
     private function retrieveIdentifier($url)
     {
-        $pattern = '/^(?:http(s)?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=(?P<identifier>\w+)$/';
+        $pattern = '/^(?:http(s)?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=(?P<identifier>[\w-]+)$/';
         $matches = [];
         preg_match($pattern, $url, $matches);
 

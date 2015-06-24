@@ -3,13 +3,28 @@
 namespace App\Bundle\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
-class DefaultController extends Controller
+/**
+ * Handle actions about record
+ */
+class RecordController extends Controller
 {
-    public function indexAction()
+    const NUMBER_PER_PAGE = 20;
+
+    /**
+     * List all records ordered by date
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function listAction(Request $request)
     {
-        $elements    = $this->get('app_main.record.lister.date')->get(RecordController::NUMBER_PER_PAGE);
-        $isNextPage  = (count($elements) === RecordController::NUMBER_PER_PAGE);
+        $page        = $request->get('page', 1);
+        $elements    = $this->get('app_main.record.lister.date')->get(self::NUMBER_PER_PAGE, $page);
+        if (count($elements) === 0) {
+            throw $this->createNotFoundException();
+        }
+        $isNextPage  = (count($elements) === self::NUMBER_PER_PAGE);
         $identifiers = $this->getIdentifiers($elements);
         $records     = $this->get('app_main.record.reader')->find($identifiers);
 
@@ -17,23 +32,7 @@ class DefaultController extends Controller
 
         return $this->render('AppMainBundle:Record:list.html.twig', [
             'records'  => $orderedRecords,
-            'nextPage' => ($isNextPage ? 2 : null),
-        ]);
-    }
-
-    /**
-     * The action to render the piwik tracking code
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function piwikAction()
-    {
-        $siteId     = $this->container->hasParameter('piwik.site_id') ? $this->container->getParameter('piwik.site_id') : null;
-        $trackerUrl = $this->container->hasParameter('piwik.tracker_url') ? $this->container->getParameter('piwik.tracker_url') : null;
-
-        return $this->render('AppMainBundle:Default:piwik.html.twig', [
-            'siteId'     => $siteId,
-            'trackerUrl' => $trackerUrl,
+            'nextPage' => ($isNextPage ? $page + 1 : null),
         ]);
     }
 

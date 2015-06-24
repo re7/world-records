@@ -19,13 +19,6 @@ class DateLister implements ListerInterface
     private $entityManager;
 
     /**
-     * The number of element on each page
-     *
-     * @var int
-     */
-    private $numberPerPage;
-
-    /**
      * __construct
      *
      * @param EntityManagerInterface $entityManager
@@ -33,16 +26,15 @@ class DateLister implements ListerInterface
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->numberPerPage = 10;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function get($page = 1)
+    public function get($numberPerPage, $page = 1)
     {
-        $offset             = ($page - 1) * $this->numberPerPage;
-        $orderedIdentifiers = $this->getRepository()->paginateByDate($this->numberPerPage, $offset);
+        $offset             = ($page - 1) * $numberPerPage;
+        $orderedIdentifiers = $this->getRepository()->paginateByDate($numberPerPage, $offset);
 
         $elements = [];
         $position = 0;

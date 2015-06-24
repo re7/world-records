@@ -138,7 +138,7 @@ class SpeedruncomHandler implements HandlerInterface
             return sprintf('http://www.twitch.tv/%s/%s', $channel, $url);
         } elseif ($youtubeNode) {
             $info = $youtubeNode->getAttribute('src');
-            $pattern = '/^(http)?(\/\/)?www\.youtube\.com\/embed\/(?P<video>\w+)(\?autoplay=0)?$/';
+            $pattern = '/^(http)?(\/\/)?www\.youtube\.com\/embed\/(?P<video>[\w-]+)(\?autoplay=0)?$/';
             $matches = [];
             preg_match($pattern, $info, $matches);
 

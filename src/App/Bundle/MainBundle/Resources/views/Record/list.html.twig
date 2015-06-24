@@ -38,4 +38,9 @@
             </div>
         {% endfor %}
     </div>
+    {% if nextPage %}
+        <div class="list-foot">
+            <a href="{{ path('app_main_record_list', {page: nextPage|default(2)}) }}">Plus</a>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -1,0 +1,3 @@
+app_main_record_list:
+    path: /records
+    defaults: { _controller: AppMainBundle:Record:list }

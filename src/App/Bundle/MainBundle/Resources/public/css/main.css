@@ -74,3 +74,9 @@ body {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.54);
 }
+
+.list-foot {
+    text-align: center;
+    padding: 4px 8px;
+    background-color: #E1E1E1;
+}

@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
 - Decrease visibility of world records already browsed
+- Ability to browse older world records pages
 
 ### Changed
 

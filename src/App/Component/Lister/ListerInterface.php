@@ -11,9 +11,10 @@ interface ListerInterface
      * Retrieve the array of elements for the given page, indexed by their
      * position
      *
+     * @param int $numberPerPage
      * @param int $page
      *
      * @return Element[]
      */
-    public function get($page = 1);
+    public function get($numberPerPage, $page = 1);
 }

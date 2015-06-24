@@ -184,11 +184,11 @@ class SpeedruncomHandler implements HandlerInterface
      */
     private function parseNote($note)
     {
-        $pattern = '/Played on (?P<platform>[\w ]*) (?:\[\w+\])* (?:on (?P<date>\d{4}-\d{2}-\d{2}))?\./';
+        $pattern = '/Played on (?P<platform>[\w ]*)(?: (?:\[\w+\])*)? (?:on (?P<date>\d{4}-\d{2}-\d{2}))?\./';
         $matches = [];
         preg_match($pattern, $note, $matches);
 
-        $platform = $matches['platform'];
+        $platform = (isset($matches['platform']) ? $matches['platform'] : '');
         $date     = (isset($matches['date']) ? new \DateTime($matches['date']) : null);
 
         return [$platform, $date];

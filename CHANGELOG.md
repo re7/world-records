@@ -7,9 +7,12 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 ### Fixed
-- Speedruncom autocompleter
 
 ### Removed
+
+## v0.2.3 - 2015-06-29
+### Fixed
+- Speedruncom autocompleter
 
 ## v0.2.2 - 2015-06-24
 ### Added

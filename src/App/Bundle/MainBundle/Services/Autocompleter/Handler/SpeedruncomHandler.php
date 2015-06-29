@@ -55,7 +55,7 @@ class SpeedruncomHandler implements HandlerInterface
      */
     private function match($url)
     {
-        return preg_match('/^(http?:\/\/)?www\.speedrun\.com\/run\/(\d+)$/', $url);
+        return preg_match('/^(http?:\/\/)?www\.speedrun\.com\/run\/(\w+)$/', $url);
     }
 
     /**

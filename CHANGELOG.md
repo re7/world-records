@@ -3,14 +3,19 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
-- Missing default thumbnail
 
 ### Changed
-- Improve readability of the homepage
 
 ### Fixed
 
 ### Removed
+
+## v0.2.4 - 2015-07-05
+### Added
+- Missing default thumbnail
+
+### Changed
+- Improve readability of the homepage
 
 ## v0.2.3 - 2015-06-29
 ### Fixed

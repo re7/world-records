@@ -3,8 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
+- Missing default thumbnail
 
 ### Changed
+- Improve readability of the homepage
 
 ### Fixed
 

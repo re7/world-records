@@ -32,12 +32,37 @@ body {
 }
 
 .list {
-    color: rgba(0, 0, 0, 0.87);
+    color: #333;
 }
 
 .list .element {
     padding: 4px 8px;
     background-color: #EEE;
+}
+
+.list .element .vote {
+    height: 60px;
+    float: left;
+    font-size: 18px;
+    text-align: center;
+    color: #888;
+    line-height: 60px;
+    background-color: #F9F9F9;
+    padding: 0 4px;
+}
+
+.list .element .vote .action {
+    text-align: center;
+    color: inherit;
+}
+.list .element .vote .action:hover {
+    text-decoration: none;
+    color: rgb(247, 11, 61);
+}
+
+.list .element .vote.voted {
+    color: rgb(247, 11, 61);
+    font-size: 32px;
 }
 
 .list .element .video-thumbnail {
@@ -52,7 +77,7 @@ body {
 .list .element .title {
     margin: 0 0 10px 0;
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.87);
+    color: #333;
 }
 
 .list .element .title .category {
@@ -60,10 +85,10 @@ body {
 }
 
 .list .element .title a {
-    color: rgba(0, 0, 0, 0.87);
+    color: #333;
 }
 .list .element .title a:visited {
-    color: #777;
+    color: #888;
 }
 .list .element .title a:hover {
     text-decoration: none;
@@ -77,6 +102,11 @@ body {
 .list .element .description {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.54);
+}
+
+.list .element .votes {
+    font-size: 12px;
+    color: #888;
 }
 
 .list-foot {

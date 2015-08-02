@@ -11,7 +11,7 @@ class DefaultController extends Controller
         $elements    = $this->get('app_main.record.lister.date')->get(RecordController::NUMBER_PER_PAGE);
         $isNextPage  = (count($elements) === RecordController::NUMBER_PER_PAGE);
         $identifiers = $this->getIdentifiers($elements);
-        $records     = $this->get('app_main.record.reader')->find($identifiers);
+        $records     = $this->get('app_main.record.index.aggregator')->get($identifiers);
 
         $orderedRecords = $this->getOrderedRecords($elements, $records);
 
@@ -59,10 +59,10 @@ class DefaultController extends Controller
      * Construct the list of ordered records using elements to get the order and
      * records to get objects
      *
-     * @param int[]                          $elements
-     * @param \App\Component\Record\Record[] $records
+     * @param int[]                                $elements
+     * @param \App\Component\Record\Index\Record[] $records
      *
-     * @param \App\Component\Record\Record[]
+     * @param \App\Component\Record\Index\Record[]
      */
     private function getOrderedRecords(array $elements, array $records)
     {

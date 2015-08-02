@@ -1,0 +1,4 @@
+services:
+    app_main.vote.reader:
+        class: App\Bundle\MainBundle\Services\Vote\DoctrineReader
+        arguments: [@doctrine.orm.entity_manager]

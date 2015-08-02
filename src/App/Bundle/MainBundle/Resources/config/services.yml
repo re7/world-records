@@ -3,6 +3,9 @@ services:
         class: App\Component\Clock\Clock
     app_main.record.entity_converter:
         class: App\Bundle\MainBundle\Services\Record\EntityConverter
+    app_main.record.index.aggregator:
+        class: App\Component\Record\Index\Aggregator
+        arguments: [@app_main.record.reader, @app_main.vote.reader]
     app_main.record.lister.date:
         class: App\Bundle\MainBundle\Services\Record\Lister\DateLister
         arguments: [@doctrine.orm.entity_manager]

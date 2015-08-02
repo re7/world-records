@@ -64,7 +64,7 @@ class RecordRepository extends EntityRepository
 
         $result = [];
         foreach ($arrayResult as $array) {
-            $result[] = $array['identifier'];
+            $result[] = (int)$array['identifier'];
         }
 
         return $result;

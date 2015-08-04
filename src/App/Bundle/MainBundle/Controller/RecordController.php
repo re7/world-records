@@ -26,7 +26,7 @@ class RecordController extends Controller
         }
         $isNextPage  = (count($elements) === self::NUMBER_PER_PAGE);
         $identifiers = $this->getIdentifiers($elements);
-        $records     = $this->get('app_main.record.reader')->find($identifiers);
+        $records     = $this->get('app_main.record.index.aggregator')->get($identifiers);
 
         $orderedRecords = $this->getOrderedRecords($elements, $records);
 

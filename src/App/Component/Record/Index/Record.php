@@ -31,17 +31,26 @@ class Record
     private $votes;
 
     /**
+     * Whether this record has been voted by the current user
+     *
+     * @var bool
+     */
+    private $voted;
+
+    /**
      * __construct
      *
-     * @param int $identifier
-     * @param Run $run
-     * @param int $votes
+     * @param int  $identifier
+     * @param Run  $run
+     * @param int  $votes
+     * @param bool $voted
      */
-    public function __construct($identifier, Run $run, $votes)
+    public function __construct($identifier, Run $run, $votes, $voted)
     {
         $this->identifier = $identifier;
         $this->run        = $run;
         $this->votes      = $votes;
+        $this->voted      = $voted;
     }
 
     /**
@@ -72,5 +81,15 @@ class Record
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     * Get voted
+     *
+     * @return bool
+     */
+    public function getVoted()
+    {
+        return $this->voted;
     }
 }

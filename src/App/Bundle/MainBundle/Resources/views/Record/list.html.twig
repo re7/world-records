@@ -16,10 +16,9 @@
     </div>
     <div class="list">
         {% for record in records %}
-            {% set voted = false %}
             <div class="element">
-                <div class="vote {% if voted %}voted{% endif %}">
-                    {% if voted %}
+                <div class="vote {% if record.voted %}voted{% endif %}">
+                    {% if record.voted %}
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                     {% else %}
                         <a class="action" href="{{ path('app_main_vote_upvote', {identifier: record.identifier}) }}">

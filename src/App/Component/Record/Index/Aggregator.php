@@ -39,17 +39,19 @@ class Aggregator implements AggregatorInterface
     /**
      * {@inheritdoc}
      */
-    public function get(array $identifiers)
+    public function get(array $identifiers, $username = null)
     {
         $aggregates = [];
         $records    = $this->recordReader->find($identifiers);
         $votes      = $this->voteReader->count($identifiers);
+        $voted      = $this->voteReader->voted($identifiers, $username);
 
         foreach ($records as $record) {
             $aggregate = new Record(
                 $record->getIdentifier(),
                 $record->getRun(),
-                $votes[$record->getIdentifier()]
+                $votes[$record->getIdentifier()],
+                $voted[$record->getIdentifier()]
             );
 
             $aggregates[$record->getIdentifier()] = $aggregate;

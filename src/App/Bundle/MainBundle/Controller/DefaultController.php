@@ -8,10 +8,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $username    = ($this->getUser() ? $this->getUser()->getUsername() : null);
         $elements    = $this->get('app_main.record.lister.date')->get(RecordController::NUMBER_PER_PAGE);
         $isNextPage  = (count($elements) === RecordController::NUMBER_PER_PAGE);
         $identifiers = $this->getIdentifiers($elements);
-        $records     = $this->get('app_main.record.index.aggregator')->get($identifiers);
+        $records     = $this->get('app_main.record.index.aggregator')->get($identifiers, $username);
 
         $orderedRecords = $this->getOrderedRecords($elements, $records);
 

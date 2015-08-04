@@ -26,7 +26,7 @@ class VoteRepository extends EntityRepository
     /**
      * Check if a vote for the given object and username already exists
      *
-     * @param string $object
+     * @param int    $object
      * @param string $username
      *
      * @return bool
@@ -44,5 +44,26 @@ class VoteRepository extends EntityRepository
         $vote = $builder->getQuery()->getOneOrNullResult();
 
         return ($vote !== null);
+    }
+
+    /**
+     * Retrieve votes about given objects and username
+     *
+     * @param int[]  $objects
+     * @param string $username
+     *
+     * @return Vote[]
+     */
+    public function findCollection($objects, $username)
+    {
+        $builder = $this->createQueryBuilder('vote');
+        $builder
+            ->where('vote.object IN (:objects)')
+            ->andWhere('vote.username = :username')
+            ->setParameter('objects', $objects)
+            ->setParameter('username', $username)
+        ;
+
+        return $builder->getQuery()->getResult();
     }
 }

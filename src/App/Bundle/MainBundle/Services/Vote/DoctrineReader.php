@@ -49,6 +49,27 @@ class DoctrineReader implements ReaderInterface
     /**
      * {@inheritdoc}
      */
+    public function voted(array $references, $username = null)
+    {
+        $voted = [];
+
+        foreach ($references as $reference) {
+            $voted[$reference] = false;
+        }
+
+        if ($username !== null) {
+            $entities = $this->getVoteRepository()->findCollection($references, $username);
+            foreach ($entities as $entity) {
+                $voted[$entity->getObject()] = true;
+            }
+        }
+
+        return $voted;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isUpvoted($object, $username)
     {
         return $this->getVoteRepository()->voteExists($object, $username);

@@ -19,6 +19,7 @@ class RecordController extends Controller
      */
     public function listAction(Request $request)
     {
+        $username    = ($this->getUser() ? $this->getUser()->getUsername() : null);
         $page        = $request->get('page', 1);
         $elements    = $this->get('app_main.record.lister.date')->get(self::NUMBER_PER_PAGE, $page);
         if (count($elements) === 0) {
@@ -26,7 +27,7 @@ class RecordController extends Controller
         }
         $isNextPage  = (count($elements) === self::NUMBER_PER_PAGE);
         $identifiers = $this->getIdentifiers($elements);
-        $records     = $this->get('app_main.record.index.aggregator')->get($identifiers);
+        $records     = $this->get('app_main.record.index.aggregator')->get($identifiers, $username);
 
         $orderedRecords = $this->getOrderedRecords($elements, $records);
 

@@ -18,6 +18,17 @@ interface ReaderInterface
     public function count(array $references);
 
     /**
+     * Check if each reference is voted by the given user. Return an array
+     * indexed by reference
+     *
+     * @param int[]       $references
+     * @param string|null $username
+     *
+     * @return bool[]
+     */
+    public function voted(array $references, $username = null);
+
+    /**
      * Check if there is already a vote for the given object and username
      *
      * @param int    $object

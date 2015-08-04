@@ -62,6 +62,20 @@ class Compiled
     }
 
     /**
+     * Set reference
+     *
+     * @param int
+     *
+     * @return self
+     */
+    public function setReference($reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
      * Get quantity
      *
      * @return int
@@ -69,5 +83,19 @@ class Compiled
     public function getQuantity()
     {
         return $this->quantity;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param int $quantity
+     *
+     * @return self
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+
+        return $this;
     }
 }

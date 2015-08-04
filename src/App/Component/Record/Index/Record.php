@@ -10,6 +10,13 @@ use App\Component\Run\Run;
 class Record
 {
     /**
+     * The unique identifier of this world record
+     *
+     * @var int
+     */
+    private $identifier;
+
+    /**
      * The run considered as a world record
      *
      * @var Run
@@ -26,13 +33,25 @@ class Record
     /**
      * __construct
      *
+     * @param int $identifier
      * @param Run $run
      * @param int $votes
      */
-    public function __construct(Run $run, $votes)
+    public function __construct($identifier, Run $run, $votes)
     {
-        $this->run   = $run;
-        $this->votes = $votes;
+        $this->identifier = $identifier;
+        $this->run        = $run;
+        $this->votes      = $votes;
+    }
+
+    /**
+     * Get identifier
+     *
+     * @return int
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
     }
 
     /**

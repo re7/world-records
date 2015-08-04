@@ -47,6 +47,14 @@ class DoctrineReader implements ReaderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function isUpvoted($object, $username)
+    {
+        return $this->getVoteRepository()->voteExists($object, $username);
+    }
+
+    /**
      * Retrieve the vote compiled entity repository
      *
      * @return \App\Bundle\MainBundle\Entity\Vote\CompiledRepository
@@ -54,5 +62,15 @@ class DoctrineReader implements ReaderInterface
     private function getCompiledRepository()
     {
         return $this->entityManager->getRepository('AppMainBundle:Vote\Compiled');
+    }
+
+    /**
+     * Retrieve the vote entity repository
+     *
+     * @return \App\Bundle\MainBundle\Entity\Vote\VoteRepository
+     */
+    private function getVoteRepository()
+    {
+        return $this->entityManager->getRepository('AppMainBundle:Vote\Vote');
     }
 }

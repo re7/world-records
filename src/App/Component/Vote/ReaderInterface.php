@@ -16,4 +16,14 @@ interface ReaderInterface
      * @return int[]
      */
     public function count(array $references);
+
+    /**
+     * Check if there is already a vote for the given object and username
+     *
+     * @param int    $object
+     * @param string $username
+     *
+     * @return bool
+     */
+    public function isUpvoted($object, $username);
 }

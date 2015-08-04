@@ -46,7 +46,11 @@ class Aggregator implements AggregatorInterface
         $votes      = $this->voteReader->count($identifiers);
 
         foreach ($records as $record) {
-            $aggregate = new Record($record->getRun(), $votes[$record->getIdentifier()]);
+            $aggregate = new Record(
+                $record->getIdentifier(),
+                $record->getRun(),
+                $votes[$record->getIdentifier()]
+            );
 
             $aggregates[$record->getIdentifier()] = $aggregate;
         }

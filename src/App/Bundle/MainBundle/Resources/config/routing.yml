@@ -10,6 +10,10 @@ app_main_submission:
     resource: "@AppMainBundle/Resources/config/Submission/routing.yml"
     prefix:   /
 
+app_main_vote:
+    resource: "@AppMainBundle/Resources/config/Vote/routing.yml"
+    prefix:   /
+
 app_main_homepage:
     path:     /
     defaults: { _controller: AppMainBundle:Default:index }

@@ -22,7 +22,7 @@
                     {% if voted %}
                         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                     {% else %}
-                        <a class="action" href="#">
+                        <a class="action" href="{{ path('app_main_vote_upvote', {identifier: record.identifier}) }}">
                             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                         </a>
                     {% endif %}

@@ -29,4 +29,31 @@ class CompiledRepository extends EntityRepository
 
         return $builder->getQuery()->getResult();
     }
+
+    /**
+     * Add one to the quantity of votes for the given reference or create a
+     * compilation if it does not exist yet
+     *
+     * @param int $reference
+     */
+    public function addVote($reference)
+    {
+        $builder = $this->createQueryBuilder('compiled');
+        $builder
+            ->where('compiled.reference = :reference')
+            ->setParameter('reference', $reference)
+        ;
+
+        $compiled = $builder->getQuery()->getOneOrNullResult();
+
+        if ($compiled === null) {
+            $compiled = new Compiled();
+            $compiled->setReference($reference);
+        }
+
+        $compiled->setQuantity($compiled->getQuantity() + 1);
+
+        $this->getEntityManager()->persist($compiled);
+        $this->getEntityManager()->flush($compiled);
+    }
 }

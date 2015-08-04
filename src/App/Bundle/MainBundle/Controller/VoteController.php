@@ -32,11 +32,6 @@ class VoteController extends Controller
 
         $reader = $this->getReader();
         if ($reader->isUpvoted($identifier, $username)) {
-            $this->get('session')->getFlashBag()->add(
-                'notice',
-                $this->get('translator')->trans('vote.notice.upvoted')
-            );
-
             return $this->redirectToRoute('app_main_homepage');
         }
 

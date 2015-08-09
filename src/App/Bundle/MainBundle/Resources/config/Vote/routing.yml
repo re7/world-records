@@ -1,0 +1,5 @@
+app_main_vote_upvote:
+    path:     /upvote/{identifier}
+    defaults: { _controller: AppMainBundle:Vote:upvote }
+    requirements:
+        identifier: \d+

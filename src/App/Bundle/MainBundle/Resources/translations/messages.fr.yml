@@ -37,3 +37,6 @@ security:
             confirm: L'email de confirmation a bien été envoyé. Vérifiez votre boîte email pour activer votre compte.
             failed: Le lien de confirmation semble invalide. Vous pouvez réessayer de vous inscrire ou contacter l'équipe pour signaler le problème.
             confirmed: Votre compte a bien été activé. Vous pouvez maintenant vous connecter.
+vote:
+    notice:
+        upvote_failed: Une erreur est survenue et a empéché de voter pour ce record.

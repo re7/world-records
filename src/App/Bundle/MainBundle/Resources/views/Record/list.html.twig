@@ -17,6 +17,15 @@
     <div class="list">
         {% for record in records %}
             <div class="element">
+                <div class="vote {% if record.voted %}voted{% endif %}">
+                    {% if record.voted %}
+                        <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                    {% else %}
+                        <a class="action" href="{{ path('app_main_vote_upvote', {identifier: record.identifier}) }}">
+                            <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                        </a>
+                    {% endif %}
+                </div>
                 <div class="video-thumbnail">
                     <a href="{{ record.run.links[0] }}"><img src="{{ record.run.thumbnail|default(asset('bundles/appmain/img/thumbnail_default.jpg')) }}" width="80" height="60" alt="{{ macros.runTitle(record.run) }}" /></a>
                 </div>
@@ -31,6 +40,9 @@
                     par {{ macros.runner(record.run.player) }},
                     sur {{ record.run.platform }},
                     le {{ record.run.date|date('d/m/Y') }}
+                </div>
+                <div class="votes">
+                    {{ record.votes|default(0) }} favoris
                 </div>
                 <div class="clear"></div>
             </div>

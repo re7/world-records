@@ -26,5 +26,6 @@ class AppMainExtension extends Extension
         $loader->load('services.yml');
         $loader->load('Security/services.yml');
         $loader->load('Submission/services.yml');
+        $loader->load('Vote/services.yml');
     }
 }

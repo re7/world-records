@@ -10,6 +10,15 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+## v0.2.5 - 2015-08-09
+### Added
+- Number of upvote on each world record
+- Ability to upvote a world record
+- Increase visibility of upvoted world records on the homepage
+
+### Fixed
+- Speedruncom autocompleter
+
 ## v0.2.4 - 2015-07-05
 ### Added
 - Missing default thumbnail

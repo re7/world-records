@@ -69,7 +69,7 @@ class SpeedruncomHandler implements HandlerInterface
         $crawler = new Crawler($content);
 
         list($playerName, $playerLink) = $this->getPlayerData($crawler);
-        $title = $crawler->filter('#titleheader')->text();
+        $title = $crawler->filter('main .sidemenu .gameinfo h2')->text();
         $description = $crawler->filter('main .maincontent h2')->eq(0)->text();
         list($category, $time) = $this->parseDescription($description);
         $note = $crawler->filter('main .maincontent footer.note')->text();
@@ -138,7 +138,7 @@ class SpeedruncomHandler implements HandlerInterface
             return sprintf('http://www.twitch.tv/%s/%s', $channel, $url);
         } elseif ($youtubeNode) {
             $info = $youtubeNode->getAttribute('src');
-            $pattern = '/^(http)?(\/\/)?www\.youtube\.com\/embed\/(?P<video>[\w-]+)(\?autoplay=0)?$/';
+            $pattern = '/^(http:)?(\/\/)?www\.youtube\.com\/embed\/(?P<video>[\w-]+)(\?)?/';
             $matches = [];
             preg_match($pattern, $info, $matches);
 

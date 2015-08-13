@@ -16,4 +16,13 @@ interface ReaderInterface
      * @return Record[]
      */
     public function find(array $identifiers);
+
+    /**
+     * Retrieve a world record having the given identifier
+     *
+     * @param int
+     *
+     * @return Record|null
+     */
+    public function findOne($identifier);
 }

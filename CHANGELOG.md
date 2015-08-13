@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## Unreleased
 ### Added
 - Permalink to each world record on the homepage list
+- Page to show each world record
 
 ### Changed
 

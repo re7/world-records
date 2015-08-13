@@ -38,6 +38,22 @@ class RecordController extends Controller
     }
 
     /**
+     * Show a world record
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showAction(Request $request)
+    {
+        $username   = ($this->getUser() ? $this->getUser()->getUsername() : null);
+        $identifier = $request->get('identifier');
+        $record     = $this->get('app_main.record.show.aggregator')->get($identifier, $username);
+
+        return $this->render('AppMainBundle:Record:show.html.twig', [
+            'record' => $record,
+        ]);
+    }
+
+    /**
      * Retrieve record identifiers from the given elements array
      *
      * @param \App\Component\Lister\Element[] $elements

@@ -43,7 +43,7 @@
                 </div>
                 <div class="infos">
                     {{ record.votes|default(0) }} favoris
-                    - <a href="#">permalink</a>
+                    - <a href="{{ path('app_main_record_show', {identifier: record.identifier}) }}">permalink</a>
                 </div>
                 <div class="clear"></div>
             </div>

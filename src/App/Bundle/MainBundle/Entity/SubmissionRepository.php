@@ -55,4 +55,22 @@ class SubmissionRepository extends EntityRepository
 
         return $builder->getQuery()->getOneOrNullResult();
     }
+
+    /**
+     * Count all submissions that are not validated yet
+     *
+     * @return int
+     */
+    public function countAllNotValidated()
+    {
+        $builder = $this->createQueryBuilder('submission');
+        $builder
+            ->select('COUNT(submission)')
+            ->where('submission.validated = FALSE')
+            ->andWhere('submission.refused = FALSE')
+            ->orderBy('submission.createdAt', 'DESC')
+        ;
+
+        return (int)$builder->getQuery()->getSingleScalarResult();
+    }
 }

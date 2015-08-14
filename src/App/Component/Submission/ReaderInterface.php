@@ -32,4 +32,11 @@ interface ReaderInterface
      * @return bool
      */
     public function isRefused($identifier);
+
+    /**
+     * Count all submissions that are not validated yet
+     *
+     * @return int
+     */
+    public function countAllNotValidated();
 }

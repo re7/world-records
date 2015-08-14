@@ -99,7 +99,7 @@ class SpeedruncomHandler implements HandlerInterface
     {
         $linkNode = $crawler->filter('main .maincontent h2')->eq(1)->filter('a')->first()->getNode(0);
         if ($linkNode) {
-            $username  = $crawler->filter('main .maincontent h2')->eq(1)->filter('span')->eq(1)->text();
+            $username  = $crawler->filter('main .maincontent h2')->eq(1)->filter('span.blackoutline')->eq(0)->text();
             $link      = sprintf('http://www.speedrun.com/user/%s', $username);
             $twitchUrl = $this->retrieveProfile($link);
 
@@ -157,7 +157,7 @@ class SpeedruncomHandler implements HandlerInterface
      */
     private function parseDescription($description)
     {
-        $pattern = '/^(?P<category>.*)\s+in\s+(?:(?P<hour>\d+)h\s+)?(?:(?P<minute>\d+)m\s+)?(?:(?P<second>\d+)s\s+)(?:(?P<milli>\d+)ms\s+)?(?:\*\s+)?by:$/';
+        $pattern = '/^(?P<category>.*)\s+in(?:\s+(?P<hour>\d+)h)?(?:\s+(?P<minute>\d+)m)?(?:\s+(?P<second>\d+)s)(?:\s+(?P<milli>\d+)ms)?(?:\*)?\s+by:$/';
         $matches = [];
         preg_match($pattern, $description, $matches);
 

@@ -1,3 +1,8 @@
 app_main_record_list:
     path: /records
     defaults: { _controller: AppMainBundle:Record:list }
+app_main_record_show:
+    path: /r/{identifier}
+    defaults: { _controller: AppMainBundle:Record:show }
+    requirements:
+        identifier: \d+

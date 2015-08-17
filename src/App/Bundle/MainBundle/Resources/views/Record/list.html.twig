@@ -41,8 +41,9 @@
                     sur {{ record.run.platform }},
                     le {{ record.run.date|date('d/m/Y') }}
                 </div>
-                <div class="votes">
+                <div class="infos">
                     {{ record.votes|default(0) }} favoris
+                    - <a href="{{ path('app_main_record_show', {identifier: record.identifier}) }}">permalink</a>
                 </div>
                 <div class="clear"></div>
             </div>

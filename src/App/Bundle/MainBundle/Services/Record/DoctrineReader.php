@@ -53,6 +53,16 @@ class DoctrineReader implements ReaderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findOne($identifier)
+    {
+        $entity = $this->getRepository()->findOneByIdentifier($identifier);
+
+        return $this->converter->from($entity);
+    }
+
+    /**
      * Retrieve the record entity repository
      *
      * @return \App\Bundle\MainBundle\Entity\Record\RecordRepository

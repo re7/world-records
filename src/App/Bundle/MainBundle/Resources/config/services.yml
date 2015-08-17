@@ -6,6 +6,9 @@ services:
     app_main.record.index.aggregator:
         class: App\Component\Record\Index\Aggregator
         arguments: [@app_main.record.reader, @app_main.vote.reader]
+    app_main.record.show.aggregator:
+        class: App\Component\Record\Show\Aggregator
+        arguments: [@app_main.record.reader, @app_main.vote.reader]
     app_main.record.lister.date:
         class: App\Bundle\MainBundle\Services\Record\Lister\DateLister
         arguments: [@doctrine.orm.entity_manager]

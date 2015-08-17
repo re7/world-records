@@ -10,6 +10,15 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+## v0.2.6
+### Added
+- Permalink to each world record on the homepage list
+- Page to show each world record
+- Number of submissions waiting in the menu bar
+
+### Fixed
+- Speedruncom autocompleter
+
 ## v0.2.5 - 2015-08-09
 ### Added
 - Number of upvote on each world record

@@ -80,6 +80,14 @@ class DoctrineReader implements ReaderInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function countAllNotValidated()
+    {
+        return $this->getRepository()->countAllNotValidated();
+    }
+
+    /**
      * Retrieve the submission entity repository
      *
      * @return \App\Bundle\MainBundle\Entity\SubmissionRepository

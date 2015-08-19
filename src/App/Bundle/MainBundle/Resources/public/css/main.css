@@ -22,9 +22,8 @@ body {
 }
 
 .list-head {
-    text-align: right;
+    text-align: left;
     padding: 4px 8px;
-    background-color: #E1E1E1;
 }
 
 .list-head .element.selected {
@@ -36,19 +35,32 @@ body {
 }
 
 .list .element {
-    padding: 4px 8px;
-    background-color: #EEE;
+    padding: 20px 8px;
+    /*margin: 16px 0;*/
+    border-top: 1px solid #DDD;
+}
+
+.list .element:first-child {
+    border-top: none;
+}
+
+.list .element .date {
+    padding: 16px;
+    float: right;
+    color: #BBB;
+    font-size: 14px;
 }
 
 .list .element .vote {
-    height: 60px;
+    height: 72px;
     float: left;
     font-size: 18px;
     text-align: center;
     color: #888;
-    line-height: 60px;
-    background-color: #F9F9F9;
+    line-height: 72px;
+    /*background-color: #F9F9F9;*/
     padding: 0 4px;
+    width: 40px;
 }
 
 .list .element .vote .action {
@@ -67,9 +79,10 @@ body {
 
 .list .element .video-thumbnail {
     float: left;
-    margin-right: 4px;
-    width: 80px;
-    height: 60px;
+    margin-left: 16px;
+    margin-right: 16px;
+    width: 96px;
+    height: 72px;
     overflow: hidden;
     background-color: white;
 }
@@ -102,6 +115,7 @@ body {
 .list .element .description {
     font-size: 12px;
     color: rgba(0, 0, 0, 0.54);
+    margin: 8px 0;
 }
 
 .list .element .infos {
@@ -116,5 +130,5 @@ body {
 .list-foot {
     text-align: center;
     padding: 4px 8px;
-    background-color: #E1E1E1;
+    font-size: 16px;
 }

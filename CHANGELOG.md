@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Main theme
+- Maximum number of world records on the homepage set to 10
 
 ### Fixed
 - Speedrun.com autocompleter

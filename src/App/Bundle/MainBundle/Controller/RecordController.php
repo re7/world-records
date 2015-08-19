@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RecordController extends Controller
 {
-    const NUMBER_PER_PAGE = 20;
+    const NUMBER_PER_PAGE = 10;
 
     /**
      * List all records ordered by date

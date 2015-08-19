@@ -22,7 +22,7 @@
 
 {% block body %}
     {{ render(controller('AppMainBundle:Menu:menu')) }}
-    <div id="content" class="container">
+    <div id="content" class="container-fluid">
         {% block flashMessage %}
             {% for flashMessage in app.session.flashbag.get('notice') %}
                 <div class="alert alert-info">

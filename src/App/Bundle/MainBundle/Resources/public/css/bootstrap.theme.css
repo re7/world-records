@@ -1,4 +1,4 @@
-.container {
+.container, .container-fluid {
     max-width: 900px;
 }
 
@@ -43,4 +43,20 @@
 
 a, a:hover {
     color: #FF6F00;
+}
+
+@media (max-width: 768px) {
+    .navbar-header .navbar-brand {
+        padding-left: 59px;
+    }
+
+    .navbar-header .navbar-brand::before {
+        content: "";
+        position: absolute;
+        background-image: url('../img/logo.png');
+        width: 32px;
+        height: 45px;
+        left: 15px;
+        top: 8px;
+    }
 }

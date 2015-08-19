@@ -70,6 +70,10 @@ body {
     background-color: white;
 }
 
+.list .element .details {
+    display: table-cell;
+}
+
 .list .element .title {
     margin: 0 0 10px 0;
     font-size: 16px;

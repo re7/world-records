@@ -5,6 +5,7 @@ namespace App\Bundle\MainBundle\Services\Autocompleter\Handler;
 use App\Bundle\MainBundle\Form\Model\Submission;
 use App\Bundle\MainBundle\Services\Autocompleter\Exception\InvalidUrlException;
 use Guzzle\Http\ClientInterface;
+use Guzzle\Http\Exception\BadResponseException;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
@@ -100,7 +101,8 @@ class SpeedruncomHandler implements HandlerInterface
         $linkNode = $crawler->filter('main .maincontent h2')->eq(1)->filter('a')->first()->getNode(0);
         if ($linkNode) {
             $username  = $crawler->filter('main .maincontent h2')->eq(1)->filter('span.blackoutline')->eq(0)->text();
-            $link      = sprintf('http://www.speedrun.com/user/%s', $username);
+            $relativePath = $crawler->filter('main .maincontent h2 a.username')->first()->attr('href');
+            $link      = sprintf('http://www.speedrun.com%s', $relativePath);
             $twitchUrl = $this->retrieveProfile($link);
 
             return [
@@ -184,7 +186,7 @@ class SpeedruncomHandler implements HandlerInterface
      */
     private function parseNote($note)
     {
-        $pattern = '/Played on (?P<platform>[\w &-]*)(?: (?:\[\w+\])*)? (?:on (?P<date>\d{4}-\d{2}-\d{2}))?\./';
+        $pattern = '/Played on (?P<platform>[\w &-]*)(?:\s?(?:\[\w+\])*)? (?:on (?P<date>\d{4}-\d{2}-\d{2}))?\./';
         $matches = [];
         preg_match($pattern, $note, $matches);
 
@@ -205,14 +207,17 @@ class SpeedruncomHandler implements HandlerInterface
     private function retrieveProfile($url)
     {
         $request  = $this->client->get($url);
-        $response = $request->send();
+        try {
+            $response = $request->send();
 
-        if ($response->getStatusCode() === 200) {
-            $crawler = new Crawler($response->getBody(true));
-            $firstProfile = $crawler->filter('main .sidemenu>div a')->eq(1);
-            if ($firstProfile->getNode(0)) {
-                return $firstProfile->attr('href');
+            if ($response->getStatusCode() === 200) {
+                $crawler = new Crawler($response->getBody(true));
+                $firstProfile = $crawler->filter('main .sidemenu>div a')->eq(1);
+                if ($firstProfile->getNode(0)) {
+                    return $firstProfile->attr('href');
+                }
             }
+        } catch (BadResponseException $exception) {
         }
 
         return null;

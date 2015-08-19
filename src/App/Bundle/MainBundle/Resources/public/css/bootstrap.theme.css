@@ -1,0 +1,62 @@
+.container, .container-fluid {
+    max-width: 900px;
+}
+
+.navbar {
+    background-color: #FFC107;
+    border-bottom: none;
+    color: #444;
+}
+
+.navbar a, .navbar a:hover {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.navbar>.container .navbar-brand {
+    margin-left: 0;
+}
+
+.navbar-header .navbar-brand {
+    position: relative;
+    height: 60px;
+    padding: 20px;
+    padding-left: 44px;
+}
+
+.navbar-header .navbar-brand::before {
+    content: "";
+    position: absolute;
+    background-image: url('../img/logo.png');
+    width: 32px;
+    height: 45px;
+    left: 0;
+    top: 8px;
+}
+
+.nav>li>a {
+    padding: 20px 15px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    background-color: inherit;
+}
+
+a, a:hover {
+    color: #FF6F00;
+}
+
+@media (max-width: 768px) {
+    .navbar-header .navbar-brand {
+        padding-left: 59px;
+    }
+
+    .navbar-header .navbar-brand::before {
+        content: "";
+        position: absolute;
+        background-image: url('../img/logo.png');
+        width: 32px;
+        height: 45px;
+        left: 15px;
+        top: 8px;
+    }
+}

@@ -12,6 +12,9 @@
 {% block content %}
     <div class="list">
         <div class="element">
+            <div class="date">
+                {{ record.run.date|date('d/m/Y') }}
+            </div>
             <div class="vote {% if record.voted %}voted{% endif %}">
                 {% if record.voted %}
                     <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
@@ -22,7 +25,7 @@
                 {% endif %}
             </div>
             <div class="video-thumbnail">
-                <a href="{{ record.run.links[0] }}"><img src="{{ record.run.thumbnail|default(asset('bundles/appmain/img/thumbnail_default.jpg')) }}" width="80" height="60" alt="{{ macros.runTitle(record.run) }}" /></a>
+                <a href="{{ record.run.links[0] }}"><img src="{{ record.run.thumbnail|default(asset('bundles/appmain/img/thumbnail_default.jpg')) }}" width="96" height="72" alt="{{ macros.runTitle(record.run) }}" /></a>
             </div>
             <div>
                 {% if record.run.links|length > 0 %}
@@ -33,8 +36,7 @@
             </div>
             <div class="description">
                 par {{ macros.runner(record.run.player) }},
-                sur {{ record.run.platform }},
-                le {{ record.run.date|date('d/m/Y') }}
+                sur {{ record.run.platform }}
             </div>
             <div class="infos">
                 {{ record.votes|default(0) }} favoris

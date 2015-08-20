@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
+
+### Changed
+
+### Fixed
+
+### Removed
+
+## v0.3.0
+### Added
 - Version assets to prevent cache problems on deploy
 
 ### Changed

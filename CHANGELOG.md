@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 ### Added
+- Version assets to prevent cache problems on deploy
 
 ### Changed
 - Main theme

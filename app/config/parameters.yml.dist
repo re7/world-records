@@ -30,3 +30,7 @@ parameters:
     piwik.site_id: false
     # Should be piwik.domain.tld
     piwik.tracker_url: false
+
+    # The assets version that should be updated at each new deploy to prevent
+    # cache conflict
+    assets_version: 1

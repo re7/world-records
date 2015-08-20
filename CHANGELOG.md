@@ -10,6 +10,19 @@ All notable changes to this project will be documented in this file.
 
 ### Removed
 
+## v0.3.0
+### Added
+- Version assets to prevent cache problems on deploy
+
+### Changed
+- Main theme
+- Maximum number of world records on the homepage set to 10
+
+### Fixed
+- Speedrun.com autocompleter
+
+### Removed
+
 ## v0.2.6
 ### Added
 - Permalink to each world record on the homepage list

@@ -12,7 +12,7 @@
 {% block content %}
     <div class="list">
         <div class="element">
-            <div class="date">
+            <div class="hidden-xs date">
                 {{ record.run.date|date('d/m/Y') }}
             </div>
             <div class="vote {% if record.voted %}voted{% endif %}">
@@ -27,19 +27,21 @@
             <div class="video-thumbnail">
                 <a href="{{ record.run.links[0] }}"><img src="{{ record.run.thumbnail|default(asset('bundles/appmain/img/thumbnail_default.jpg')) }}" width="96" height="72" alt="{{ macros.runTitle(record.run) }}" /></a>
             </div>
-            <div>
-                {% if record.run.links|length > 0 %}
-                    <span class="title"><a href="{{ record.run.links[0] }}">{{ macros.runTitle(record.run) }}</a></span>
-                {% else %}
-                    <span class="title">{{ macros.runTitle(record.run) }}</span> <span class="info">(pas de vidéo)</span>
-                {% endif %}
-            </div>
-            <div class="description">
-                par {{ macros.runner(record.run.player) }},
-                sur {{ record.run.platform }}
-            </div>
-            <div class="infos">
-                {{ record.votes|default(0) }} favoris
+            <div class="details">
+                <div>
+                    {% if record.run.links|length > 0 %}
+                        <span class="title"><a href="{{ record.run.links[0] }}">{{ macros.runTitle(record.run) }}</a></span>
+                    {% else %}
+                        <span class="title">{{ macros.runTitle(record.run) }}</span> <span class="info">(pas de vidéo)</span>
+                    {% endif %}
+                </div>
+                <div class="description">
+                    par {{ macros.runner(record.run.player) }},
+                    sur {{ record.run.platform }}
+                </div>
+                <div class="infos">
+                    {{ record.votes|default(0) }} favoris
+                </div>
             </div>
             <div class="clear"></div>
         </div>

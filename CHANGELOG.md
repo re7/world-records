@@ -21,8 +21,6 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 - Speedrun.com autocompleter
 
-### Removed
-
 ## v0.2.6
 ### Added
 - Permalink to each world record on the homepage list
